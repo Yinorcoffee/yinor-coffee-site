@@ -138,7 +138,7 @@ function New-Page {
   $fm = Get-FrontMatter $content
   $body = Strip-FrontMatter $content
 
-  $canonPath = if ($IsIndex) { '/' } else { "/$Slug" }
+  $canonPath = if ($IsIndex) { '/' } else { "/$Slug/" }
   $canonical = $domain + $canonPath
   $ogImage   = $fm['ogimage']; if (-not $ogImage) { $ogImage = '/assets/img/hero-home.jpg' }
   $ogTitle   = $fm['title'];   if (-not $ogTitle) { $ogTitle = 'Yinor Coffee - Wholesale Specialty Coffee Beans' }
@@ -176,7 +176,7 @@ function New-Page {
   [System.IO.File]::WriteAllText($file, $html, (New-Object System.Text.UTF8Encoding($false)))
 
   if (-not $ExcludeFromSitemap) {
-    $loc = if ($IsIndex) { $domain + '/' } else { $domain + '/' + $Slug }
+    $loc = if ($IsIndex) { $domain + '/' } else { $domain + '/' + $Slug + '/' }
     $sitemap.Add("  <url><loc>$loc</loc><lastmod>$today</lastmod><priority>$Priority</priority></url>")
   }
   Write-Host "built: $file"
@@ -239,7 +239,7 @@ $($sitemap -join "`n")
 
 # ---------- _redirects (Netlify) ----------
 $redir = @"
-/product-catalog  $domain/premium-espresso-blends-coffee-beans  301
+/product-catalog  /premium-espresso-blends-coffee-beans  301
 "@
 [System.IO.File]::WriteAllText((Join-Path $out '_redirects'), $redir, (New-Object System.Text.UTF8Encoding($false)))
 
