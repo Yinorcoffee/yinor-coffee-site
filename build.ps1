@@ -240,6 +240,7 @@ $($sitemap -join "`n")
 # ---------- _redirects (Netlify) ----------
 $redir = @"
 /product-catalog  /premium-espresso-blends-coffee-beans  301
+/home  /  301
 "@
 [System.IO.File]::WriteAllText((Join-Path $out '_redirects'), $redir, (New-Object System.Text.UTF8Encoding($false)))
 
