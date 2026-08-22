@@ -91,7 +91,6 @@ collections:
     folder: "src/products"
     create: true
     extension: body.html
-    format: frontmatter
     frontmatter_delimiter: ["<!--", "-->"]
     slug: "{{slug}}"
     fields:
@@ -109,7 +108,6 @@ collections:
     folder: "src/posts"
     create: true
     extension: body.html
-    format: frontmatter
     frontmatter_delimiter: ["<!--", "-->"]
     slug: "{{slug}}"
     fields:
