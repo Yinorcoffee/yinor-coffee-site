@@ -8,11 +8,15 @@
     // Redirect Netlify Identity confirm/recovery/invite links to the CMS admin
     (function () {
       try {
-        var p = new URLSearchParams(window.location.search);
-        var type = p.get('type');
-        var token = p.get('token');
-        if (type && token && window.location.pathname.indexOf('/admin') === -1) {
-          window.location.replace('/admin/?' + window.location.search.substring(1));
+        var isAdmin = window.location.pathname.indexOf('/admin') !== -1;
+        if (!isAdmin) {
+          var q = window.location.search || '';
+          var h = window.location.hash || '';
+          var hasQToken = q.indexOf('token=') !== -1 && q.indexOf('type=') !== -1;
+          var hasHToken = h.indexOf('recovery_token=') !== -1 || h.indexOf('confirmation_token=') !== -1 || h.indexOf('invite_token=') !== -1;
+          if (hasQToken || hasHToken) {
+            window.location.replace('/admin/' + h);
+          }
         }
       } catch (e) { /* ignore */ }
     })();
