@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Colorful Summer Espresso Blend (454g) | Yinor Coffee</title>
+  <script>
+    // Redirect Netlify Identity confirm/recovery/invite links to the CMS admin
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var type = p.get('type');
+        var token = p.get('token');
+        if (type && token && window.location.pathname.indexOf('/admin') === -1) {
+          window.location.replace('/admin/?' + window.location.search.substring(1));
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Colorful Summer medium roast espresso - washed Yirgacheffe & honey-processed Costa Rica with floral and mixed fruit notes. 454g whole bean, OEM & private label.">
   <link rel="canonical" href="https://yinorcoffee.com/colorful-summer-medium-roast-yirgacheffe-espresso-blend-454g-whole-bean-sweet-and-complex/">
   <meta name="robots" content="index, follow">

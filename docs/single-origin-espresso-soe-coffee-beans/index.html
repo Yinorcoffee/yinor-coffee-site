@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Single Origin Espresso SOE Wholesale | Yinor Coffee</title>
+  <script>
+    // Redirect Netlify Identity confirm/recovery/invite links to the CMS admin
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var type = p.get('type');
+        var token = p.get('token');
+        if (type && token && window.location.pathname.indexOf('/admin') === -1) {
+          window.location.replace('/admin/?' + window.location.search.substring(1));
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale single origin espresso (SOE) beans from Ethiopia and Kenya. Traceable lots, roasted to highlight terroir. 454g packs, OEM & private label.">
   <link rel="canonical" href="https://yinorcoffee.com/single-origin-espresso-soe-coffee-beans/">
   <meta name="robots" content="index, follow">

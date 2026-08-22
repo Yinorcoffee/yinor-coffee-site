@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{TITLE}}</title>
+  <script>
+    // Redirect Netlify Identity confirm/recovery/invite links to the CMS admin
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var type = p.get('type');
+        var token = p.get('token');
+        if (type && token && window.location.pathname.indexOf('/admin') === -1) {
+          window.location.replace('/admin/?' + window.location.search.substring(1));
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="{{DESC}}">
   <link rel="canonical" href="{{CANONICAL}}">
   <meta name="robots" content="index, follow">

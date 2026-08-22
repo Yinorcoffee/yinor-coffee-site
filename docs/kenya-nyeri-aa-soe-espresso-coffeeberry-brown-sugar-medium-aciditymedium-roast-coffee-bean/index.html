@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kenya Nyeri AA SOE Espresso | Yinor Coffee</title>
+  <script>
+    // Redirect Netlify Identity confirm/recovery/invite links to the CMS admin
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var type = p.get('type');
+        var token = p.get('token');
+        if (type && token && window.location.pathname.indexOf('/admin') === -1) {
+          window.location.replace('/admin/?' + window.location.search.substring(1));
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Kenya Nyeri AA single origin espresso - washed SL28 & SL34 with berry and brown sugar notes. Medium roast, 454g packs, OEM & private label.">
   <link rel="canonical" href="https://yinorcoffee.com/kenya-nyeri-aa-soe-espresso-coffeeberry-brown-sugar-medium-aciditymedium-roast-coffee-bean/">
   <meta name="robots" content="index, follow">

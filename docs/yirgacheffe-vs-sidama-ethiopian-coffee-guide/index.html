@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yirgacheffe vs Sidama: Ethiopian Coffee Guide | Yinor Coffee</title>
+  <script>
+    // Redirect Netlify Identity confirm/recovery/invite links to the CMS admin
+    (function () {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        var type = p.get('type');
+        var token = p.get('token');
+        if (type && token && window.location.pathname.indexOf('/admin') === -1) {
+          window.location.replace('/admin/?' + window.location.search.substring(1));
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Yirgacheffe vs Sidama - two of Ethiopia's most famous coffee regions. Compare flavor profiles, processing and which to choose for your cafe or blend.">
   <link rel="canonical" href="https://yinorcoffee.com/yirgacheffe-vs-sidama-ethiopian-coffee-guide/">
   <meta name="robots" content="index, follow">
