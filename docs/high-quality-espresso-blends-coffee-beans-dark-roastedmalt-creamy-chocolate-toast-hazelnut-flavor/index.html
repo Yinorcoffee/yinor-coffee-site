@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Macco dark roast espresso - Yunnan, Brazil & Ethiopia with malt, creamy chocolate, toast and hazelnut notes. 454g packs, custom roasting & private label.">
   <link rel="canonical" href="https://yinorcoffee.com/high-quality-espresso-blends-coffee-beans-dark-roastedmalt-creamy-chocolate-toast-hazelnut-flavor/">
   <meta name="robots" content="index, follow">

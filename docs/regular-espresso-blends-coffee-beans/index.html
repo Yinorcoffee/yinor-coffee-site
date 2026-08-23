@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Everyday espresso blends for busy cafes and offices. Full-bodied, chocolatey and consistent, roasted in 454g wholesale packs. Custom roast profiles & OEM available.">
   <link rel="canonical" href="https://yinorcoffee.com/regular-espresso-blends-coffee-beans/">
   <meta name="robots" content="index, follow">

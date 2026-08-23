@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Sunshine Orchard medium-dark espresso from Kenya, Brazil, Sidama and Colombia - berry, cream and toffee notes. 454g whole bean packs, OEM & private label.">
   <link rel="canonical" href="https://yinorcoffee.com/sunshine-orchard-whole-bean-coffee-454g-medium-dark-roast-espresso-blend/">
   <meta name="robots" content="index, follow">

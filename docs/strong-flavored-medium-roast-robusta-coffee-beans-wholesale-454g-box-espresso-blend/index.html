@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Rose Summer Blend espresso - a sweet, juicy mix of Sidama, Yirgacheffe and Granja La Esperanza with citrus and maple syrup notes. 454g packs, OEM ready.">
   <link rel="canonical" href="https://yinorcoffee.com/strong-flavored-medium-roast-robusta-coffee-beans-wholesale-454g-box-espresso-blend/">
   <meta name="robots" content="index, follow">

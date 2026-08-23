@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Request a wholesale coffee quote from Yinor Coffee. Custom roasting, private label OEM and bulk specialty beans for cafes, roasters & distributors.">
   <link rel="canonical" href="https://yinorcoffee.com/request-a-consultation-coffee-wholesale-inquiry/">
   <meta name="robots" content="index, follow">

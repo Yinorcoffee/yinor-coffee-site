@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Sidama G1 natural espresso from Ethiopia - citrus, cream and berry notes, medium-dark roast. Whole bean 454g packs for cafes, OEM & private label.">
   <link rel="canonical" href="https://yinorcoffee.com/ethiopia-heirloom-micro-coffee-chosen-2100-medium-dark-roast-espresso-whole-bean-fruit-flavored-arabica-beans-bag-for-cafe-shop/">
   <meta name="robots" content="index, follow">

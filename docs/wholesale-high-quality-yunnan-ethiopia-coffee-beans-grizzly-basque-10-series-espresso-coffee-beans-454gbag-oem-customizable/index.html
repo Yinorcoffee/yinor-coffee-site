@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Caramel Biscuit espresso - a Yunnan & Ethiopia blend with toast, creamy chocolate and caramel notes. 454g packs, OEM customizable for your brand.">
   <link rel="canonical" href="https://yinorcoffee.com/wholesale-high-quality-yunnan-ethiopia-coffee-beans-grizzly-basque-10-series-espresso-coffee-beans-454gbag-oem-customizable/">
   <meta name="robots" content="index, follow">

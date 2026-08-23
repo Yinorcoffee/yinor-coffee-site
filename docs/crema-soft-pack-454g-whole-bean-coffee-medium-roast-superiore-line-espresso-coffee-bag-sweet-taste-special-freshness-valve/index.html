@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Sweet Tangerine medium roast espresso from Sidama, Yirgacheffe & Kenya - berry, floral and caramel notes. Soft pack with freshness valve, OEM ready.">
   <link rel="canonical" href="https://yinorcoffee.com/crema-soft-pack-454g-whole-bean-coffee-medium-roast-superiore-line-espresso-coffee-bag-sweet-taste-special-freshness-valve/">
   <meta name="robots" content="index, follow">

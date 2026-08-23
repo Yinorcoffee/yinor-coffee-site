@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Browse Yinor Coffee's wholesale catalog: espresso blends, single origins & SOE. Specialty beans in 454g packs, OEM & private label ready. Get a quote.">
   <link rel="canonical" href="https://yinorcoffee.com/premium-espresso-blends-coffee-beans/">
   <meta name="robots" content="index, follow">

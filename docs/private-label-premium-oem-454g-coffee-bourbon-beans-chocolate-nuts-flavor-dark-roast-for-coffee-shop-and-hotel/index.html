@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Chocolate Nuts dark roast espresso with rich, smooth dark chocolate and nutty notes. 454g packs, private label & OEM ready for cafes and hotels.">
   <link rel="canonical" href="https://yinorcoffee.com/private-label-premium-oem-454g-coffee-bourbon-beans-chocolate-nuts-flavor-dark-roast-for-coffee-shop-and-hotel/">
   <meta name="robots" content="index, follow">

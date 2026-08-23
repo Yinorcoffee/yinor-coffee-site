@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Buying coffee beans wholesale from China? Learn how to find a reliable roaster, check sampling and QC, and set up private label or OEM supply.">
   <link rel="canonical" href="https://yinorcoffee.com/how-to-buy-coffee-beans-wholesale-from-china/">
   <meta name="robots" content="index, follow">

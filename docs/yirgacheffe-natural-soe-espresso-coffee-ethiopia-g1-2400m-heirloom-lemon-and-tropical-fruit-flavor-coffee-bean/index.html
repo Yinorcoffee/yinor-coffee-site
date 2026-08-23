@@ -21,6 +21,20 @@
       } catch (e) { /* ignore */ }
     })();
   </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
   <meta name="description" content="Wholesale Yirgacheffe Natural SOE espresso from Ethiopia G1, grown at 2400m - lemon and tropical fruit notes, clean and sweet. 454g packs, custom roasting & OEM.">
   <link rel="canonical" href="https://yinorcoffee.com/yirgacheffe-natural-soe-espresso-coffee-ethiopia-g1-2400m-heirloom-lemon-and-tropical-fruit-flavor-coffee-bean/">
   <meta name="robots" content="index, follow">
