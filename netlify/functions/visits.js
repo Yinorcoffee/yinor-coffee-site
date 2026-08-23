@@ -19,7 +19,7 @@ export default async (req) => {
       await store.setJSON(key, existing);
       return new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
     } catch (e) {
-      return new Response(JSON.stringify({ ok: false }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+      return new Response(JSON.stringify({ ok: false, error: String(e && e.message ? e.message : e) }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
   }
 
