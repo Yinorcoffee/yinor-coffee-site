@@ -1,0 +1,45 @@
+<!--
+title: Site Statistics | Yinor Coffee
+desc: Yinor Coffee website visitor statistics.
+ogimage: /assets/img/hero-home.jpg
+-->
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> &rsaquo; Statistics</nav>
+    <h1>Site Visitor Statistics</h1>
+    <p class="lead">Daily visitor counts and page views for yinorcoffee.com.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:860px;">
+    <div id="stats" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);">
+      <p>Loading statistics...</p>
+    </div>
+    <p class="mt-2" style="color:var(--muted);font-size:0.85rem;">This is a private page - bookmark the URL to check your visitor numbers.</p>
+  </div>
+</section>
+
+<script>
+(function () {
+  var el = document.getElementById('stats');
+  fetch('/.netlify/functions/visits').then(function (r) { return r.json(); }).then(function (data) {
+    if (!data.days || data.days.length === 0) {
+      el.innerHTML = '<p>No visits recorded yet.</p>';
+      return;
+    }
+    var html = '<table class="spec-table" style="margin:0;"><tr><th>Date</th><th>Visits</th><th>Top Pages</th></tr>';
+    var total = 0;
+    data.days.slice().reverse().forEach(function (d) {
+      total += d.views;
+      var pages = Object.keys(d.pages || {}).slice(0, 4).map(function (p) { return p + ' (' + d.pages[p] + ')'; }).join(', ');
+      html += '<tr><td>' + d.date + '</td><td>' + d.views + '</td><td>' + pages + '</td></tr>';
+    });
+    html += '</table>';
+    html = '<h3 style="margin-bottom:14px;">Total visits recorded: ' + total + '</h3>' + html;
+    el.innerHTML = html;
+  }).catch(function () {
+    el.innerHTML = '<p>Could not load statistics.</p>';
+  });
+})();
+</script>
