@@ -141,7 +141,8 @@ const pages = [
   { f: 'blog.body.html', s: 'blog', i: false, p: '0.6' },
   { f: 'privacy-policy.body.html', s: 'privacy-policy', i: false, p: '0.3' },
   { f: 'terms-and-conditions.body.html', s: 'terms-and-conditions', i: false, p: '0.3' },
-  { f: 'product-catalog.body.html', s: 'product-catalog', i: false, p: '0.0', x: true }
+  { f: 'product-catalog.body.html', s: 'product-catalog', i: false, p: '0.0', x: true },
+  { f: 'stats.body.html', s: 'stats', i: false, p: '0.0', x: true }
 ];
 for (const pg of pages) {
   buildPage(path.join(src, 'pages', pg.f), pg.s, pg.i, pg.p, pg.x);
