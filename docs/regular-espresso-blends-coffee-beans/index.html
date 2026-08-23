@@ -26,10 +26,13 @@
     (function () {
       if (window.location.pathname.indexOf('/admin') !== -1) return;
       try {
+        var ref = document.referrer || '';
+        var refHost = '';
+        try { refHost = ref ? new URL(ref).hostname : ''; } catch (e) { refHost = ref; }
         fetch('/.netlify/functions/visits', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ path: window.location.pathname }),
+          body: JSON.stringify({ path: window.location.pathname, referrer: refHost }),
           keepalive: true
         });
       } catch (e) { /* ignore */ }

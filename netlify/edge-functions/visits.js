@@ -17,6 +17,13 @@ export default async (req, context) => {
       const p = (body.path || '/').split('?')[0];
       existing.pages[p] = (existing.pages[p] || 0) + 1;
 
+      // referrer (source website) from client
+      const ref = (body.referrer || '').replace(/^https?:\/\//, '').replace(/^www\./, '').toLowerCase();
+      if (ref) {
+        existing.referrers = existing.referrers || {};
+        existing.referrers[ref] = (existing.referrers[ref] || 0) + 1;
+      }
+
       // country + city from Netlify edge geo data
       const geo = context.geo || {};
       const country = (geo.country && geo.country.code) || 'Unknown';

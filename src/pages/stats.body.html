@@ -37,12 +37,13 @@ ogimage: /assets/img/hero-home.jpg
       el.innerHTML = '<p>No visits recorded yet.</p>';
       return;
     }
-    var total = 0, countries = {}, devices = {}, pages = {};
+    var total = 0, countries = {}, devices = {}, pages = {}, referrers = {};
     data.days.forEach(function (d) {
       total += d.views;
       Object.keys(d.countries || {}).forEach(function (c) { countries[c] = (countries[c] || 0) + d.countries[c]; });
       Object.keys(d.devices || {}).forEach(function (x) { devices[x] = (devices[x] || 0) + d.devices[x]; });
       Object.keys(d.pages || {}).forEach(function (p) { pages[p] = (pages[p] || 0) + d.pages[p]; });
+      Object.keys(d.referrers || {}).forEach(function (r) { referrers[r] = (referrers[r] || 0) + d.referrers[r]; });
     });
     var rows = data.days.slice().reverse().map(function (d) {
       var top = Object.keys(d.pages || {}).slice(0, 3).map(function (p) { return p + ' (' + d.pages[p] + ')'; }).join(', ');
@@ -57,10 +58,14 @@ ogimage: /assets/img/hero-home.jpg
     var pRows = Object.keys(pages).sort(function (a, b) { return pages[b] - pages[a]; }).slice(0, 10).map(function (p) {
       return '<tr><td>' + p + '</td><td>' + pages[p] + '</td></tr>';
     }).join('');
+    var refRows = Object.keys(referrers).sort(function (a, b) { return referrers[b] - referrers[a]; }).slice(0, 10).map(function (r) {
+      return '<tr><td>' + r + '</td><td>' + referrers[r] + '</td></tr>';
+    }).join('');
     var html = '<h3 style="margin-bottom:14px;">Total visits recorded: ' + total + '</h3>';
     html += '<h4 style="margin:18px 0 8px;">By Country</h4><table class="spec-table" style="margin:0 0 8px;"><tr><th>Country</th><th>Visits</th></tr>' + cRows + '</table>';
     html += '<h4 style="margin:18px 0 8px;">By Device</h4><table class="spec-table" style="margin:0 0 8px;"><tr><th>Device</th><th>Visits</th></tr>' + dRows + '</table>';
     html += '<h4 style="margin:18px 0 8px;">Top Pages</h4><table class="spec-table" style="margin:0 0 8px;"><tr><th>Page</th><th>Views</th></tr>' + pRows + '</table>';
+    html += '<h4 style="margin:18px 0 8px;">Source Websites (Referrers)</h4><table class="spec-table" style="margin:0 0 8px;"><tr><th>Source</th><th>Visits</th></tr>' + (refRows || '<tr><td>Direct / unknown</td><td>-</td></tr>') + '</table>';
     html += '<h4 style="margin:18px 0 8px;">Daily</h4><table class="spec-table" style="margin:0;"><tr><th>Date</th><th>Visits</th><th>Top Pages</th></tr>' + rows + '</table>';
     el.innerHTML = html;
   }).catch(function () {
