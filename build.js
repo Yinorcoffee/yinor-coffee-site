@@ -179,6 +179,7 @@ write(path.join(out, '_redirects'),
 
 // ---------- GitHub Pages helper ----------
 write(path.join(out, '.nojekyll'), '');
+write(path.join(out, 'CNAME'), 'yinorcoffee.com\n');
 
 // ---------- Decap CMS admin ----------
 if (fs.existsSync(path.join(src, 'admin'))) {
