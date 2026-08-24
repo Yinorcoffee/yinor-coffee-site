@@ -170,6 +170,8 @@ const pages = [
   { f: 'regular-espresso-blends-coffee-beans.body.html', s: 'regular-espresso-blends-coffee-beans', i: false, p: '0.8' },
   { f: 'premium-espresso-coffee-beans.body.html', s: 'premium-espresso-coffee-beans', i: false, p: '0.8' },
   { f: 'single-origin-espresso-soe-coffee-beans.body.html', s: 'single-origin-espresso-soe-coffee-beans', i: false, p: '0.8' },
+  { f: 'coffee-makers.body.html', s: 'coffee-makers', i: false, p: '0.7' },
+  { f: 'coffee-pods-bags.body.html', s: 'coffee-pods-bags', i: false, p: '0.7' },
   { f: 'about-us-coffee-beans.body.html', s: 'about-us-coffee-beans', i: false, p: '0.6' },
   { f: 'request-a-consultation-coffee-wholesale-inquiry.body.html', s: 'request-a-consultation-coffee-wholesale-inquiry', i: false, p: '0.6' },
   { f: 'blog.body.html', s: 'blog', i: false, p: '0.6' },
