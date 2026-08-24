@@ -147,6 +147,7 @@ function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
   html = html.replace(/\{\{PRODUCT_GRID:premium\}\}/g, productGrid('premium'));
   html = html.replace(/\{\{PRODUCT_GRID:soe\}\}/g, productGrid('soe'));
   html = html.replace(/\{\{PRODUCT_GRID:pods\}\}/g, productGrid('pods'));
+  html = html.replace(/\{\{PRODUCT_GRID:makers\}\}/g, productGrid('makers'));
   html = html.replace(/\{\{HOME_PRODUCTS\}\}/g, homeProducts);
   html = html.replace(/\{\{POST_LIST\}\}/g, postList);
   if (html.indexOf('{{GALLERY}}') !== -1) {
