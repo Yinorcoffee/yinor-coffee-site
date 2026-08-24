@@ -56,7 +56,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css?v=4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -204,6 +204,19 @@
   </script>
   <script>
     // Gallery: main image + arrows + bottom thumbnails
+    // Global arrow handler (inline onclick on buttons - always works)
+    // Uses instant scroll (behavior auto) so it can never be cancelled
+    window.galleryStep = function (btn, dir) {
+      var g = btn.closest('[data-gallery]');
+      if (!g) return;
+      var track = g.querySelector('.gallery-slides');
+      var slides = g.querySelectorAll('.gallery-slide');
+      if (!track || slides.length < 2) return;
+      var w = track.clientWidth || 1;
+      var idx = Math.round(track.scrollLeft / w);
+      var next = Math.max(0, Math.min(slides.length - 1, idx + dir));
+      track.scrollTo({ left: next * w, behavior: 'auto' });
+    };
     (function () {
       function initGallery(g) {
         var slides = g.querySelectorAll('.gallery-slide');
@@ -231,15 +244,11 @@
         }, { passive: true });
         function show(i) {
           i = (i + slides.length) % slides.length;
-          track.scrollTo({ left: i * (track.clientWidth || 0), behavior: 'smooth' });
+          track.scrollTo({ left: i * (track.clientWidth || 0), behavior: 'auto' });
         }
         thumbs.forEach(function (t, j) {
           t.addEventListener('click', function () { show(j); });
         });
-        var prev = g.querySelector('.gallery-prev');
-        var nxt = g.querySelector('.gallery-next');
-        if (prev) prev.addEventListener('click', function () { show(idx - 1); });
-        if (nxt) nxt.addEventListener('click', function () { show(idx + 1); });
         // mouse drag to scroll left/right
         var isDown = false, startX = 0, startScroll = 0;
         track.addEventListener('mousedown', function (e) {

@@ -242,14 +242,11 @@ p { margin-bottom: 1em; }
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
-  scroll-behavior: smooth;
   cursor: grab;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(120, 80, 40, 0.35) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.gallery-slides::-webkit-scrollbar { height: 6px; }
-.gallery-slides::-webkit-scrollbar-track { background: transparent; }
-.gallery-slides::-webkit-scrollbar-thumb { background: rgba(120, 80, 40, 0.35); border-radius: 3px; }
+.gallery-slides::-webkit-scrollbar { display: none; height: 0; width: 0; }
 .gallery-slides.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
 .gallery-slide {
   flex: 0 0 100%;

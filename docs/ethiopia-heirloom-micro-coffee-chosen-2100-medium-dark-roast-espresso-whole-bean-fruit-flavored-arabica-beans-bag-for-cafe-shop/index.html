@@ -56,7 +56,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css?v=4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -127,8 +127,8 @@
       <img src="/assets/img/gallery/1c8ee8e1-9d00-4397-8425-47ccfd58cb3a.jpg" alt="Sidama G1 - product image 3" class="gallery-slide" data-i="2" loading="lazy">
       <img src="/assets/img/gallery/ef034012-106d-4e85-a599-f4fb86767ed1.jpg" alt="Sidama G1 - product image 4" class="gallery-slide" data-i="3" loading="lazy">
     </div>
-    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image">&#10094;</button>
-    <button class="gallery-btn gallery-next" type="button" aria-label="Next image">&#10095;</button>
+    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image" onclick="galleryStep(this,-1)">&#10094;</button>
+    <button class="gallery-btn gallery-next" type="button" aria-label="Next image" onclick="galleryStep(this,1)">&#10095;</button>
     <div class="gallery-thumbs">
       <img src="/assets/img/gallery/4ae51f9d-7c16-41b8-91a1-3b4d7be29a56.jpg" alt="Thumbnail 1" class="gallery-thumb active" data-i="0" loading="lazy">
       <img src="/assets/img/gallery/4cf2d705-168d-450b-9445-9ecf3a5817da.jpg" alt="Thumbnail 2" class="gallery-thumb" data-i="1" loading="lazy">
@@ -305,6 +305,19 @@
   </script>
   <script>
     // Gallery: main image + arrows + bottom thumbnails
+    // Global arrow handler (inline onclick on buttons - always works)
+    // Uses instant scroll (behavior auto) so it can never be cancelled
+    window.galleryStep = function (btn, dir) {
+      var g = btn.closest('[data-gallery]');
+      if (!g) return;
+      var track = g.querySelector('.gallery-slides');
+      var slides = g.querySelectorAll('.gallery-slide');
+      if (!track || slides.length < 2) return;
+      var w = track.clientWidth || 1;
+      var idx = Math.round(track.scrollLeft / w);
+      var next = Math.max(0, Math.min(slides.length - 1, idx + dir));
+      track.scrollTo({ left: next * w, behavior: 'auto' });
+    };
     (function () {
       function initGallery(g) {
         var slides = g.querySelectorAll('.gallery-slide');
@@ -332,15 +345,11 @@
         }, { passive: true });
         function show(i) {
           i = (i + slides.length) % slides.length;
-          track.scrollTo({ left: i * (track.clientWidth || 0), behavior: 'smooth' });
+          track.scrollTo({ left: i * (track.clientWidth || 0), behavior: 'auto' });
         }
         thumbs.forEach(function (t, j) {
           t.addEventListener('click', function () { show(j); });
         });
-        var prev = g.querySelector('.gallery-prev');
-        var nxt = g.querySelector('.gallery-next');
-        if (prev) prev.addEventListener('click', function () { show(idx - 1); });
-        if (nxt) nxt.addEventListener('click', function () { show(idx + 1); });
         // mouse drag to scroll left/right
         var isDown = false, startX = 0, startScroll = 0;
         track.addEventListener('mousedown', function (e) {

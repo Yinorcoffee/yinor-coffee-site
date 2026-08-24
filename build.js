@@ -123,7 +123,7 @@ function galleryHtml(slug, pname) {
   const thumbs = imgs.map(function (src, i) {
     return '      <img src="' + src + '" alt="Thumbnail ' + (i + 1) + '" class="gallery-thumb' + (i === 0 ? ' active' : '') + '" data-i="' + i + '" loading="lazy">';
   }).join('\n');
-  return '<div class="gallery" data-gallery>\n    <div class="gallery-slides">\n' + slides + '\n    </div>\n    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image">&#10094;</button>\n    <button class="gallery-btn gallery-next" type="button" aria-label="Next image">&#10095;</button>\n    <div class="gallery-thumbs">\n' + thumbs + '\n    </div>\n  </div>';
+  return '<div class="gallery" data-gallery>\n    <div class="gallery-slides">\n' + slides + '\n    </div>\n    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image" onclick="galleryStep(this,-1)">&#10094;</button>\n    <button class="gallery-btn gallery-next" type="button" aria-label="Next image" onclick="galleryStep(this,1)">&#10095;</button>\n    <div class="gallery-thumbs">\n' + thumbs + '\n    </div>\n  </div>';
 }
 
 function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
