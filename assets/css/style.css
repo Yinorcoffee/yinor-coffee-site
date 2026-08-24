@@ -207,9 +207,12 @@ p { margin-bottom: 1em; }
 @media (max-width: 520px) { .footer-grid { grid-template-columns: 1fr; } }
 .footer-grid ul { list-style: none; }
 .footer-grid li { margin-bottom: 0.5em; }
-.footer-grid ul.footer-sublist { margin: 0.45em 0 0.2em 0.9em; padding-left: 0.7em; border-left: 1px solid rgba(255,255,255,0.14); }
+.footer-grid ul.footer-sublist { display: none; margin: 0.45em 0 0.2em 0.9em; padding-left: 0.7em; border-left: 1px solid rgba(255,255,255,0.14); }
+.footer-grid ul.footer-sublist.open { display: block; }
 .footer-grid ul.footer-sublist li { margin-bottom: 0.4em; }
 .footer-grid ul.footer-sublist a { font-size: 0.88em; }
+.footer-toggle { background: none; border: 0; color: #cbbda8; cursor: pointer; font-size: 0.75rem; padding: 2px 6px; vertical-align: middle; transition: color 0.2s, transform 0.2s; }
+.footer-toggle:hover { color: var(--amber); }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 20px; font-size: 0.82rem; color: #9a8a74; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
 .social-links { display: flex; gap: 10px; margin-top: 16px; }
 .social-links a {

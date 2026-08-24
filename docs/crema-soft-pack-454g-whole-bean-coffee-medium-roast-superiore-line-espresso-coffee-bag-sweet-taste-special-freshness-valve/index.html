@@ -277,6 +277,7 @@
           <h4>Products</h4>
           <ul>
             <li><a href="/premium-espresso-blends-coffee-beans">Whole Bean Coffee</a>
+              <button type="button" class="footer-toggle" aria-label="Expand Whole Bean Coffee subcategories" aria-expanded="false" onclick="toggleFooterSub(this)">&#9662;</button>
               <ul class="footer-sublist">
                 <li><a href="/regular-espresso-blends-coffee-beans">Regular Espresso Blends</a></li>
                 <li><a href="/premium-espresso-coffee-beans">Premium Espresso Blends</a></li>
@@ -335,6 +336,15 @@
     })();
   </script>
   <script>
+    // Footer subcategory expand/collapse (inline onclick - always works)
+    window.toggleFooterSub = function (btn) {
+      var sub = btn.parentNode.querySelector('.footer-sublist');
+      if (!sub) return;
+      var open = sub.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.innerHTML = open ? '&#9652;' : '&#9662;';
+    };
     // Gallery: main image + arrows + bottom thumbnails
     // Global arrow handler (inline onclick on buttons - always works)
     // Uses instant scroll (behavior auto) so it can never be cancelled
