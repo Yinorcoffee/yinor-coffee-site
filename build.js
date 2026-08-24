@@ -45,17 +45,26 @@ const products = fs.readdirSync(path.join(src, 'products'))
   });
 
 const catLabel = { regular: 'Regular Espresso Blend', premium: 'Premium Espresso Blend', soe: 'Single Origin Espresso' };
-const productCard = (p) => [
-  `<a class="product-card" href="/${p.slug}">`,
-  `  <img src="${p.ogimage}" alt="${p.pname} - wholesale coffee beans - Yinor Coffee" loading="lazy">`,
-  '  <div class="body">',
-  `    <div class="meta">${catLabel[p.category]}</div>`,
-  `    <h3>${p.pname}</h3>`,
-  `    <p class="flavor">${p.flavor}</p>`,
-  '    <span class="btn btn-dark">View Product</span>',
-  '  </div>',
-  '</a>'
-].join('\n');
+const productCard = (p) => {
+  const imgs = (galleryMap && galleryMap[p.slug]) || [];
+  const img2 = imgs.length > 1 ? imgs[1] : null;
+  const hoverImg = img2
+    ? `\n  <img src="${img2}" alt="${p.pname} - alternate image" class="pc-img2" loading="lazy">`
+    : '';
+  return [
+    `<a class="product-card" href="/${p.slug}">`,
+    '  <div class="pc-images">',
+    `    <img src="${p.ogimage}" alt="${p.pname} - wholesale coffee beans - Yinor Coffee" loading="lazy">`,
+    hoverImg,
+    '  </div>',
+    '  <div class="body">',
+    `    <h3>${p.pname}</h3>`,
+    `    <p class="flavor">${p.flavor}</p>`,
+    '    <span class="pc-btn">View Product</span>',
+    '  </div>',
+    '</a>'
+  ].join('\n');
+};
 const productGrid = (which) => products.filter(p => which === 'all' || p.category === which).map(productCard).join('\n');
 
 const featured = [
@@ -109,9 +118,12 @@ function galleryHtml(slug, pname) {
   }
   const slides = imgs.map(function (src, i) {
     const alt = i === 0 ? (pname + ' - wholesale coffee beans - Yinor Coffee') : (pname + ' - product image ' + (i + 1));
-    return '      <img src="' + src + '" alt="' + alt + '" class="gallery-slide' + (i === 0 ? ' active' : '') + '" loading="lazy">';
+    return '      <img src="' + src + '" alt="' + alt + '" class="gallery-slide' + (i === 0 ? ' active' : '') + '" data-i="' + i + '" loading="lazy">';
   }).join('\n');
-  return '<div class="gallery" data-gallery>\n    <div class="gallery-slides">\n' + slides + '\n    </div>\n    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image">&#10094;</button>\n    <button class="gallery-btn gallery-next" type="button" aria-label="Next image">&#10095;</button>\n    <div class="gallery-dots"></div>\n  </div>';
+  const thumbs = imgs.map(function (src, i) {
+    return '      <img src="' + src + '" alt="Thumbnail ' + (i + 1) + '" class="gallery-thumb' + (i === 0 ? ' active' : '') + '" data-i="' + i + '" loading="lazy">';
+  }).join('\n');
+  return '<div class="gallery" data-gallery>\n    <div class="gallery-slides">\n' + slides + '\n    </div>\n    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image">&#10094;</button>\n    <button class="gallery-btn gallery-next" type="button" aria-label="Next image">&#10095;</button>\n    <div class="gallery-thumbs">\n' + thumbs + '\n    </div>\n  </div>';
 }
 
 function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
