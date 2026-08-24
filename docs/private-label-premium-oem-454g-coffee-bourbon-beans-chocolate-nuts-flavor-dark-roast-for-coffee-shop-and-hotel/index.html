@@ -285,16 +285,30 @@
       function initGallery(g) {
         var slides = g.querySelectorAll('.gallery-slide');
         if (slides.length < 2) return;
+        var track = g.querySelector('.gallery-slides');
         var thumbs = g.querySelectorAll('.gallery-thumb');
-        var idx = 0;
-        function show(i) {
-          idx = (i + slides.length) % slides.length;
+        var idx = 0, ticking = false;
+        function current() {
+          var w = track.clientWidth || 1;
+          return Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / w)));
+        }
+        function sync() {
+          idx = current();
           slides.forEach(function (s, j) { s.classList.toggle('active', j === idx); });
           thumbs.forEach(function (t, j) { t.classList.toggle('active', j === idx); });
           var activeThumb = thumbs[idx];
           if (activeThumb && activeThumb.scrollIntoView) {
             try { activeThumb.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e) {}
           }
+        }
+        track.addEventListener('scroll', function () {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function () { ticking = false; sync(); });
+        }, { passive: true });
+        function show(i) {
+          i = (i + slides.length) % slides.length;
+          track.scrollTo({ left: i * (track.clientWidth || 0), behavior: 'smooth' });
         }
         thumbs.forEach(function (t, j) {
           t.addEventListener('click', function () { show(j); });
@@ -303,6 +317,26 @@
         var nxt = g.querySelector('.gallery-next');
         if (prev) prev.addEventListener('click', function () { show(idx - 1); });
         if (nxt) nxt.addEventListener('click', function () { show(idx + 1); });
+        // mouse drag to scroll left/right
+        var isDown = false, startX = 0, startScroll = 0;
+        track.addEventListener('mousedown', function (e) {
+          if (e.button !== 0) return;
+          isDown = true; startX = e.pageX; startScroll = track.scrollLeft;
+          track.classList.add('dragging');
+        });
+        window.addEventListener('mousemove', function (e) {
+          if (!isDown) return;
+          track.scrollLeft = startScroll - (e.pageX - startX);
+        });
+        window.addEventListener('mouseup', function () {
+          if (!isDown) return;
+          isDown = false;
+          track.classList.remove('dragging');
+          show(current());
+        });
+        slides.forEach(function (s) {
+          s.addEventListener('dragstart', function (e) { e.preventDefault(); });
+        });
       }
       document.querySelectorAll('[data-gallery]').forEach(initGallery);
     })();
