@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Statistics | Yinor Coffee</title>
+  <script>
+    // Redirect Netlify Identity confirm/recovery/invite links to the CMS admin
+    (function () {
+      try {
+        var isAdmin = window.location.pathname.indexOf('/admin') !== -1;
+        if (!isAdmin) {
+          var q = window.location.search || '';
+          var h = window.location.hash || '';
+          var hasQToken = q.indexOf('token=') !== -1 && q.indexOf('type=') !== -1;
+          var hasHToken = h.indexOf('recovery_token=') !== -1 || h.indexOf('confirmation_token=') !== -1 || h.indexOf('invite_token=') !== -1;
+          if (hasQToken || hasHToken) {
+            window.location.replace('/admin/' + h);
+          }
+        }
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <script>
+    // Visitor tracking (Netlify Function + Blobs)
+    (function () {
+      if (window.location.pathname.indexOf('/admin') !== -1) return;
+      try {
+        var ref = document.referrer || '';
+        var refHost = '';
+        try { refHost = ref ? new URL(ref).hostname : ''; } catch (e) { refHost = ref; }
+        fetch('/.netlify/functions/visits', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: window.location.pathname, referrer: refHost }),
+          keepalive: true
+        });
+      } catch (e) { /* ignore */ }
+    })();
+  </script>
+  <meta name="description" content="Yinor Coffee website visitor statistics.">
+  <link rel="canonical" href="https://yinorcoffee.com/stats/">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Yinor Coffee">
+  <meta property="og:title" content="Site Statistics | Yinor Coffee">
+  <meta property="og:description" content="Yinor Coffee website visitor statistics.">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta property="og:image" content="https://yinorcoffee.com/assets/img/hero-home.jpg">
+  <meta property="og:image:alt" content="Yinor Coffee - Wholesale Specialty Coffee Beans">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{OG_TITLE}}">
+  <meta name="twitter:description" content="{{OG_DESC}}">
+  <meta name="twitter:image" content="https://yinorcoffee.com{{OG_IMAGE}}">
+  <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Zhanjiang Yinor International Trade Co., Ltd.",
+    "alternateName": "Yinor Coffee",
+    "url": "https://yinorcoffee.com",
+    "email": "nina@yinorcoffee.com",
+    "logo": "https://yinorcoffee.com/assets/img/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+86-178-0658-2525",
+      "contactType": "sales",
+      "availableLanguage": ["English", "Chinese"]
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rm 301, 3/F, 28 Shanzhuang 5th St, Meilu, Wuchuan",
+      "addressLocality": "Zhanjiang",
+      "addressRegion": "Guangdong",
+      "addressCountry": "CN"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/">
+        <img src="/assets/img/logo.png" alt="Yinor Coffee logo">
+        <span>Yinor Coffee<small>Wholesale Specialty Coffee</small></span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" onclick="document.getElementById('siteNav').classList.toggle('open')">&#9776;</button>
+      <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li class="dropdown">
+            <a href="/premium-espresso-blends-coffee-beans">Whole Bean Coffee</a>
+            <ul class="dropdown-menu">
+              <li><a href="/regular-espresso-blends-coffee-beans">Regular Espresso Blends</a></li>
+              <li><a href="/premium-espresso-coffee-beans">Premium Espresso Blends</a></li>
+              <li><a href="/single-origin-espresso-soe-coffee-beans">Single Origin Espresso (SOE)</a></li>
+            </ul>
+          </li>
+          <li><a href="/about-us-coffee-beans">About Us</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/assets/yinor-coffee-catalogue.pdf" target="_blank" rel="noopener">E-Catalog Download</a></li>
+          <li class="cta"><a href="/request-a-consultation-coffee-wholesale-inquiry">Request a Quote</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> &rsaquo; Statistics</nav>
+    <h1>Site Visitor Statistics</h1>
+    <p class="lead">Daily visitors, countries and devices for yinorcoffee.com.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:860px;">
+    <div id="stats" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);">
+      <p>Loading statistics...</p>
+    </div>
+    <p class="mt-2" style="color:var(--muted);font-size:0.85rem;">Private page - bookmark the URL. Data is anonymous (country/device/pages only).</p>
+  </div>
+</section>
+
+<script>
+(function () {
+  var countryNames = {
+    US: 'United States', GB: 'United Kingdom', DE: 'Germany', FR: 'France', NL: 'Netherlands',
+    CN: 'China', JP: 'Japan', KR: 'South Korea', SG: 'Singapore', MY: 'Malaysia', TH: 'Thailand',
+    AU: 'Australia', NZ: 'New Zealand', CA: 'Canada', BR: 'Brazil', MX: 'Mexico', IN: 'India',
+    AE: 'UAE', SA: 'Saudi Arabia', TR: 'Turkey', ES: 'Spain', IT: 'Italy', RU: 'Russia',
+    UA: 'Ukraine', PL: 'Poland', SE: 'Sweden', CH: 'Switzerland', HK: 'Hong Kong', TW: 'Taiwan',
+    VN: 'Vietnam', ID: 'Indonesia', PH: 'Philippines', IE: 'Ireland', AT: 'Austria', BE: 'Belgium'
+  };
+  function name(c) { return countryNames[c] || c; }
+  var el = document.getElementById('stats');
+  fetch('/.netlify/functions/visits').then(function (r) { return r.json(); }).then(function (data) {
+    if (!data.days || data.days.length === 0) {
+      el.innerHTML = '<p>No visits recorded yet.</p>';
+      return;
+    }
+    var total = 0, countries = {}, devices = {}, pages = {}, referrers = {};
+    data.days.forEach(function (d) {
+      total += d.views;
+      Object.keys(d.countries || {}).forEach(function (c) { countries[c] = (countries[c] || 0) + d.countries[c]; });
+      Object.keys(d.devices || {}).forEach(function (x) { devices[x] = (devices[x] || 0) + d.devices[x]; });
+      Object.keys(d.pages || {}).forEach(function (p) { pages[p] = (pages[p] || 0) + d.pages[p]; });
+      Object.keys(d.referrers || {}).forEach(function (r) { referrers[r] = (referrers[r] || 0) + d.referrers[r]; });
+    });
+    var rows = data.days.slice().reverse().map(function (d) {
+      var top = Object.keys(d.pages || {}).slice(0, 3).map(function (p) { return p + ' (' + d.pages[p] + ')'; }).join(', ');
+      return '<tr><td>' + d.date + '</td><td>' + d.views + '</td><td>' + top + '</td></tr>';
+    }).join('');
+    var cRows = Object.keys(countries).sort(function (a, b) { return countries[b] - countries[a]; }).map(function (c) {
+      return '<tr><td>' + name(c) + '</td><td>' + countries[c] + '</td></tr>';
+    }).join('');
+    var dRows = Object.keys(devices).map(function (x) {
+      return '<tr><td>' + x + '</td><td>' + devices[x] + '</td></tr>';
+    }).join('');
+    var pRows = Object.keys(pages).sort(function (a, b) { return pages[b] - pages[a]; }).slice(0, 10).map(function (p) {
+      return '<tr><td>' + p + '</td><td>' + pages[p] + '</td></tr>';
+    }).join('');
+    var refRows = Object.keys(referrers).sort(function (a, b) { return referrers[b] - referrers[a]; }).slice(0, 10).map(function (r) {
+      return '<tr><td>' + r + '</td><td>' + referrers[r] + '</td></tr>';
+    }).join('');
+    var html = '<h3 style="margin-bottom:14px;">Total visits recorded: ' + total + '</h3>';
+    html += '<h4 style="margin:18px 0 8px;">By Country</h4><table class="spec-table" style="margin:0 0 8px;"><tr><th>Country</th><th>Visits</th></tr>' + cRows + '</table>';
+    html += '<h4 style="margin:18px 0 8px;">By Device</h4><table class="spec-table" style="margin:0 0 8px;"><tr><th>Device</th><th>Visits</th></tr>' + dRows + '</table>';
+    html += '<h4 style="margin:18px 0 8px;">Top Pages</h4><table class="spec-table" style="margin:0 0 8px;"><tr><th>Page</th><th>Views</th></tr>' + pRows + '</table>';
+    html += '<h4 style="margin:18px 0 8px;">Source Websites (Referrers)</h4><table class="spec-table" style="margin:0 0 8px;"><tr><th>Source</th><th>Visits</th></tr>' + (refRows || '<tr><td>Direct / unknown</td><td>-</td></tr>') + '</table>';
+    html += '<h4 style="margin:18px 0 8px;">Daily</h4><table class="spec-table" style="margin:0;"><tr><th>Date</th><th>Visits</th><th>Top Pages</th></tr>' + rows + '</table>';
+    el.innerHTML = html;
+  }).catch(function () {
+    el.innerHTML = '<p>Could not load statistics.</p>';
+  });
+})();
+</script>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="/" style="color:#fff;margin-bottom:14px;display:inline-flex;">
+            <img src="/assets/img/logo.png" alt="Yinor Coffee logo" style="width:40px;height:40px;border-radius:8px;">
+            <span style="font-family:var(--font-head);font-weight:700;">Yinor Coffee</span>
+          </a>
+          <p style="margin-top:12px;">A specialty coffee roasting &amp; wholesale supplier in Zhanjiang, China. Custom roasting, private label and OEM/ODM programs for cafes, roasters, hotels and distributors worldwide.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/Jack%20Chen" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.13 8.44 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99C18.34 21.13 22 16.99 22 12z"/></svg>
+            </a>
+            <a href="https://wa.me/8617806582525" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 2C8.3 2 2 8.3 2 16c0 2.5.7 4.8 1.9 6.8L2 30l7.4-1.9c1.9 1 4.1 1.6 6.6 1.6 7.7 0 14-6.3 14-14S23.7 2 16 2zm0 25.4c-2.2 0-4.3-.6-6.1-1.7l-.4-.3-4.4 1.2 1.2-4.3-.3-.5c-1.2-1.8-1.9-4-1.9-6.3C4.1 9.4 9.4 4.1 16 4.1s11.9 5.3 11.9 11.9-5.3 11.4-11.9 11.4zm6.6-8.6c-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.4-1 1.2-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.8.2-.3.3-.4.4-.7.1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-1 .5-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/yinor02/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zm0 1.8c-3.15 0-3.5.01-4.74.07-1.14.05-1.76.24-2.17.4-.55.21-.94.47-1.35.88-.41.41-.67.8-.88 1.35-.16.41-.35 1.03-.4 2.17C2.21 8.5 2.2 8.85 2.2 12s.01 3.5.07 4.74c.05 1.14.24 1.76.4 2.17.21.55.47.94.88 1.35.41.41.8.67 1.35.88.41.16 1.03.35 2.17.4 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.14-.05 1.76-.24 2.17-.4.55-.21.94-.47 1.35-.88.41-.41.67-.8.88-1.35.16-.41.35-1.03.4-2.17.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.14-.24-1.76-.4-2.17-.21-.55-.47-.94-.88-1.35-.41-.41-.8-.67-1.35-.88-.41-.16-1.03-.35-2.17-.4C15.5 4.01 15.15 4 12 4zm0 3.06A4.94 4.94 0 1 0 12 16.94 4.94 4.94 0 0 0 12 7.06zm0 8.14A3.2 3.2 0 1 1 12 8.8a3.2 3.2 0 0 1 0 6.4zm6.3-8.34a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@jackchen" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4>Products</h4>
+          <ul>
+            <li><a href="/regular-espresso-blends-coffee-beans">Regular Espresso Blends</a></li>
+            <li><a href="/premium-espresso-coffee-beans">Premium Espresso Blends</a></li>
+            <li><a href="/single-origin-espresso-soe-coffee-beans">Single Origin Espresso (SOE)</a></li>
+            <li><a href="/premium-espresso-blends-coffee-beans">Whole Bean Coffee</a></li>
+            <li><a href="/assets/yinor-coffee-catalogue.pdf" target="_blank" rel="noopener">E-Catalog (PDF)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/about-us-coffee-beans">About Us</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/request-a-consultation-coffee-wholesale-inquiry">Request a Consultation</a></li>
+            <li><a href="/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/terms-and-conditions">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>YinorCoffee, Rm 301, 3/F, 28 Shanzhuang 5th St, Meilu, Wuchuan, Zhanjiang, Guangdong, China</li>
+            <li><a href="tel:+8617806582525">+86 178 0658 2525</a></li>
+            <li><a href="mailto:nina@yinorcoffee.com">nina@yinorcoffee.com</a></li>
+            <li><a href="https://wa.me/8617806582525" target="_blank" rel="noopener">WhatsApp: +86 178 0658 2525</a></li>
+            <li>Office: Mon-Fri 09:00-18:00, Sat-Sun 10:00-16:00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Zhanjiang Yinor International Trade Co., Ltd. All rights reserved.</span>
+        <span>Yinor Coffee - Great blending is not a compromise. It is an elevation.</span>
+      </div>
+    </div>
+  </footer>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+  <a class="whatsapp-fab" href="https://wa.me/8617806582525" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 2C8.3 2 2 8.3 2 16c0 2.5.7 4.8 1.9 6.8L2 30l7.4-1.9c1.9 1 4.1 1.6 6.6 1.6 7.7 0 14-6.3 14-14S23.7 2 16 2zm0 25.4c-2.2 0-4.3-.6-6.1-1.7l-.4-.3-4.4 1.2 1.2-4.3-.3-.5c-1.2-1.8-1.9-4-1.9-6.3C4.1 9.4 9.4 4.1 16 4.1s11.9 5.3 11.9 11.9-5.3 11.4-11.9 11.4zm6.6-8.6c-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.4-1 1.2-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.8.2-.3.3-.4.4-.7.1-.3 0-.5 0-.7-.1-.2-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6h-.7c-.2 0-.6.1-1 .5-.3.3-1.2 1.2-1.2 2.9s1.2 3.4 1.4 3.6c.2.2 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg>
+  </a>
+  <script>
+    (function() {
+      var btt = document.getElementById('backToTop');
+      function toggle() {
+        if (window.scrollY > 300) { btt.classList.add('show'); } else { btt.classList.remove('show'); }
+      }
+      window.addEventListener('scroll', toggle, { passive: true });
+      toggle();
+      btt.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+  </script>
+  <script>
+    // Gallery: main image + arrows + bottom thumbnails
+    (function () {
+      function initGallery(g) {
+        var slides = g.querySelectorAll('.gallery-slide');
+        if (slides.length < 2) return;
+        var thumbs = g.querySelectorAll('.gallery-thumb');
+        var idx = 0;
+        function show(i) {
+          idx = (i + slides.length) % slides.length;
+          slides.forEach(function (s, j) { s.classList.toggle('active', j === idx); });
+          thumbs.forEach(function (t, j) { t.classList.toggle('active', j === idx); });
+          var activeThumb = thumbs[idx];
+          if (activeThumb && activeThumb.scrollIntoView) {
+            try { activeThumb.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e) {}
+          }
+        }
+        thumbs.forEach(function (t, j) {
+          t.addEventListener('click', function () { show(j); });
+        });
+        var prev = g.querySelector('.gallery-prev');
+        var nxt = g.querySelector('.gallery-next');
+        if (prev) prev.addEventListener('click', function () { show(idx - 1); });
+        if (nxt) nxt.addEventListener('click', function () { show(idx + 1); });
+      }
+      document.querySelectorAll('[data-gallery]').forEach(initGallery);
+    })();
+  </script>
+</body>
+</html>

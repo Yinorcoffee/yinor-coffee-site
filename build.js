@@ -44,6 +44,13 @@ const products = fs.readdirSync(path.join(src, 'products'))
     return Object.assign({ slug: f.replace(/\.body\.html$/, '') }, fm);
   });
 
+// ---------- product gallery map (old-site images) ----------
+let galleryMap = {};
+const galleryMapFile = path.join(root, 'assets', 'img', 'gallery', 'gallery-map.json');
+if (fs.existsSync(galleryMapFile)) {
+  try { galleryMap = JSON.parse(fs.readFileSync(galleryMapFile, 'utf8')); } catch (e) { galleryMap = {}; }
+}
+
 const catLabel = { regular: 'Regular Espresso Blend', premium: 'Premium Espresso Blend', soe: 'Single Origin Espresso' };
 const productCard = (p) => {
   const imgs = (galleryMap && galleryMap[p.slug]) || [];
@@ -103,13 +110,6 @@ const basePath = (process.env.BASE_PATH || '').replace(/\/+$/, '');
 
 // ---------- sitemap ----------
 const sitemap = [];
-
-// ---------- product gallery map (old-site images) ----------
-let galleryMap = {};
-const galleryMapFile = path.join(root, 'assets', 'img', 'gallery', 'gallery-map.json');
-if (fs.existsSync(galleryMapFile)) {
-  try { galleryMap = JSON.parse(fs.readFileSync(galleryMapFile, 'utf8')); } catch (e) { galleryMap = {}; }
-}
 
 function galleryHtml(slug, pname) {
   const imgs = galleryMap[slug] || [];
