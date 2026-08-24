@@ -95,6 +95,25 @@ const basePath = (process.env.BASE_PATH || '').replace(/\/+$/, '');
 // ---------- sitemap ----------
 const sitemap = [];
 
+// ---------- product gallery map (old-site images) ----------
+let galleryMap = {};
+const galleryMapFile = path.join(root, 'assets', 'img', 'gallery', 'gallery-map.json');
+if (fs.existsSync(galleryMapFile)) {
+  try { galleryMap = JSON.parse(fs.readFileSync(galleryMapFile, 'utf8')); } catch (e) { galleryMap = {}; }
+}
+
+function galleryHtml(slug, pname) {
+  const imgs = galleryMap[slug] || [];
+  if (!imgs.length) {
+    return '<img src="/assets/img/hero-products.jpg" alt="' + (pname || 'Yinor Coffee') + '" style="border-radius:var(--radius);box-shadow:var(--shadow);">';
+  }
+  const slides = imgs.map(function (src, i) {
+    const alt = i === 0 ? (pname + ' - wholesale coffee beans - Yinor Coffee') : (pname + ' - product image ' + (i + 1));
+    return '      <img src="' + src + '" alt="' + alt + '" class="gallery-slide' + (i === 0 ? ' active' : '') + '" loading="lazy">';
+  }).join('\n');
+  return '<div class="gallery" data-gallery>\n    <div class="gallery-slides">\n' + slides + '\n    </div>\n    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image">&#10094;</button>\n    <button class="gallery-btn gallery-next" type="button" aria-label="Next image">&#10095;</button>\n    <div class="gallery-dots"></div>\n  </div>';
+}
+
 function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
   const content = read(bodyFile);
   const fm = parseFrontMatter(content);
@@ -117,6 +136,9 @@ function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
   html = html.replace(/\{\{PRODUCT_GRID:soe\}\}/g, productGrid('soe'));
   html = html.replace(/\{\{HOME_PRODUCTS\}\}/g, homeProducts);
   html = html.replace(/\{\{POST_LIST\}\}/g, postList);
+  if (html.indexOf('{{GALLERY}}') !== -1) {
+    html = html.replace(/\{\{GALLERY\}\}/g, galleryHtml(slug, fm.pname || fm.title || 'Yinor Coffee'));
+  }
 
   if (basePath) html = html.replace(/(href|src)="\//g, `$1="${basePath}/`);
 

@@ -246,5 +246,40 @@
       });
     })();
   </script>
+  <script>
+    // Gallery / carousel
+    (function () {
+      function initGallery(g) {
+        var slides = g.querySelectorAll('.gallery-slide');
+        if (slides.length < 2) return;
+        var dotsWrap = g.querySelector('.gallery-dots');
+        var idx = 0, timer = null;
+        slides.forEach(function (s, i) {
+          s.classList.toggle('active', i === 0);
+          var d = document.createElement('span');
+          d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+          d.addEventListener('click', function () { show(i); });
+          dotsWrap.appendChild(d);
+        });
+        var dots = dotsWrap.querySelectorAll('.gallery-dot');
+        function show(i) {
+          idx = (i + slides.length) % slides.length;
+          slides.forEach(function (s, j) { s.classList.toggle('active', j === idx); });
+          dots.forEach(function (d, j) { d.classList.toggle('active', j === idx); });
+        }
+        function next() { show(idx + 1); }
+        var prev = g.querySelector('.gallery-prev');
+        var nxt = g.querySelector('.gallery-next');
+        if (prev) prev.addEventListener('click', function () { show(idx - 1); });
+        if (nxt) nxt.addEventListener('click', next);
+        function start() { if (!timer) timer = setInterval(next, 4000); }
+        function stop() { if (timer) { clearInterval(timer); timer = null; } }
+        g.addEventListener('mouseenter', stop);
+        g.addEventListener('mouseleave', start);
+        start();
+      }
+      document.querySelectorAll('[data-gallery]').forEach(initGallery);
+    })();
+  </script>
 </body>
 </html>
