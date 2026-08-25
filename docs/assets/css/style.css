@@ -115,6 +115,13 @@ p { margin-bottom: 1em; }
   box-shadow: var(--shadow); padding: 28px; transition: transform 0.2s;
 }
 .card:hover { transform: translateY(-3px); }
+.cat-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+.cat-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0,0,0,0.14); }
+.cat-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.cat-card .body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+.cat-card h3 { margin-bottom: 0.4em; }
+.cat-card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 0.9em; flex: 1; }
+.cat-card .btn { align-self: flex-start; }
 .card .icon { font-size: 1.7rem; margin-bottom: 0.5em; }
 .card h3 { margin-bottom: 0.4em; }
 .card p { color: var(--muted); font-size: 0.95rem; margin: 0; }
