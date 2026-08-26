@@ -126,7 +126,7 @@
   <div class="container" style="display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start;">
     <div>
       <div class="notice">Tell us about your business and needs - volume, roast profile, packaging or origin preferences. Our team will reply within 1-2 business days with a tailored quote.</div>
-      <form class="contact-form" action="mailto:nina@yinorcoffee.com" method="post" enctype="text/plain">
+      <form class="contact-form" onsubmit="return submitInquiry(this)">
         <label for="name">Name *</label>
         <input type="text" id="name" name="Name" required>
         <label for="company">Company Name</label>
@@ -136,16 +136,30 @@
         <label for="topic">Wholesale Inquiry *</label>
         <select id="topic" name="InquiryType" required>
           <option value="">Select a topic...</option>
-          <option>Bulk roasted coffee beans</option>
+          <option>Whole bean coffee (blends / single origin)</option>
+          <option>Coffee makers / machines</option>
+          <option>Coffee capsules</option>
+          <option>Drip bag coffee</option>
           <option>Private label / OEM program</option>
           <option>Custom roast profile</option>
-          <option>Single origin / SOE lots</option>
           <option>Other</option>
         </select>
         <label for="details">Request Details</label>
         <textarea id="details" name="Details" rows="6" placeholder="Volume, target roast, origin preferences, packaging, timeline..."></textarea>
         <button class="btn btn-primary" type="submit">Send Inquiry by Email</button>
       </form>
+      <script>
+        function submitInquiry(f) {
+          function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+          var name = val('name'), company = val('company'), email = val('email'), topic = val('topic'), details = val('details');
+          if (!name || !email || !topic) { alert('Please fill in Name, Business Email and Inquiry topic.'); return false; }
+          var body = 'Name: ' + name + '\nCompany: ' + company + '\nBusiness Email: ' + email + '\nInquiry: ' + topic;
+          if (details) body += '\n\nDetails:\n' + details;
+          var subject = 'Wholesale Inquiry from yinorcoffee.com - ' + topic;
+          window.location.href = 'mailto:nina@yinorcoffee.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+          return false;
+        }
+      </script>
       <p class="mt-1" style="font-size:0.85rem;color:var(--muted);">Prefer chat? Reach us directly on WhatsApp or email.</p>
     </div>
     <div class="contact-info" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);">
@@ -155,7 +169,7 @@
         <li><strong>Phone / WhatsApp</strong><a href="tel:+8617806582525">+86 178 0658 2525</a><br><a href="https://wa.me/8617806582525" target="_blank" rel="noopener">Chat on WhatsApp</a></li>
         <li><strong>Address</strong>YinorCoffee, Rm 301, 3/F, 28 Shanzhuang 5th St, Meilu, Wuchuan, Zhanjiang, Guangdong, China</li>
         <li><strong>Office Hours</strong>Mon - Fri: 09:00 - 18:00<br>Sat - Sun: 10:00 - 16:00</li>
-        <li><strong>Catalog</strong><a href="https://assets.zyrosite.com/j5e7RFyWxAyqjQ9C/yinor-coffee-catalogue-KiOVfdFltUY0wX0s.pdf" target="_blank" rel="noopener">Download E-Catalog (PDF)</a></li>
+        <li><strong>Catalog</strong><a href="/assets/yinor-coffee-catalogue.pdf" target="_blank" rel="noopener">Download E-Catalog (PDF)</a></li>
       </ul>
     </div>
   </div>
