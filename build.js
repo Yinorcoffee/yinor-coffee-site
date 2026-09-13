@@ -21,6 +21,14 @@ fs.cpSync(path.join(root, 'assets'), path.join(out, 'assets'), { recursive: true
 const read = (p) => fs.readFileSync(p, 'utf8');
 const write = (p, c) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, c, 'utf8'); };
 
+// ---------- template substitution ----------
+// IMPORTANT: use split/join instead of String.prototype.replace(string, ...).
+//  * replace() only substitutes the FIRST occurrence, which left {{CANONICAL}},
+//    {{OG_TITLE}}, {{OG_DESC}} and {{OG_IMAGE}} unrendered in og:url and the
+//    twitter: cards on every page.
+//  * split/join also avoids "$&"/"$1" being interpreted inside page titles.
+const sub = (s, token, value) => s.split(token).join(value);
+
 // ---------- front matter helpers ----------
 function parseFrontMatter(content) {
   const m = content.match(/^<!--\s*([\s\S]*?)\s*-->/);
@@ -157,13 +165,14 @@ function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
   const canonical = isIndex ? domain + '/' : domain + '/' + slug + '/';
   const ogImage = fm.ogimage || '/assets/img/hero-home.jpg';
 
-  let html = headerTpl
-    .replace('{{TITLE}}', fm.title || '')
-    .replace('{{DESC}}', fm.desc || '')
-    .replace('{{CANONICAL}}', canonical)
-    .replace('{{OG_TITLE}}', fm.title || 'Yinor Coffee - Wholesale Specialty Coffee Beans')
-    .replace('{{OG_DESC}}', fm.desc || 'Wholesale specialty coffee beans from China. Custom roasting, private label & OEM for cafes and roasters.')
-    .replace('{{OG_IMAGE}}', ogImage)
+  let html = [
+    ['{{TITLE}}', fm.title || ''],
+    ['{{DESC}}', fm.desc || ''],
+    ['{{CANONICAL}}', canonical],
+    ['{{OG_TITLE}}', fm.title || 'Yinor Coffee - Wholesale Specialty Coffee Beans'],
+    ['{{OG_DESC}}', fm.desc || 'Wholesale specialty coffee beans from China. Custom roasting, private label & OEM for cafes and roasters.'],
+    ['{{OG_IMAGE}}', ogImage]
+  ].reduce((acc, pair) => sub(acc, pair[0], pair[1]), headerTpl)
     + '\n' + body + '\n' + footerTpl;
 
   html = html.replace(/\{\{PRODUCT_GRID:all\}\}/g, productGrid('all'));
@@ -224,11 +233,14 @@ for (const p of posts) buildPage(path.join(src, 'posts', p.slug + '.body.html'),
 {
   const c = read(path.join(src, 'pages', '404.body.html'));
   const fm = parseFrontMatter(c);
-  const html = headerTpl
-    .replace('{{TITLE}}', fm.title).replace('{{DESC}}', fm.desc)
-    .replace('{{CANONICAL}}', domain + '/404.html')
-    .replace('{{OG_TITLE}}', fm.title).replace('{{OG_DESC}}', fm.desc)
-    .replace('{{OG_IMAGE}}', '/assets/img/hero-home.jpg')
+  const html = [
+    ['{{TITLE}}', fm.title || ''],
+    ['{{DESC}}', fm.desc || ''],
+    ['{{CANONICAL}}', domain + '/404.html'],
+    ['{{OG_TITLE}}', fm.title || ''],
+    ['{{OG_DESC}}', fm.desc || ''],
+    ['{{OG_IMAGE}}', '/assets/img/hero-home.jpg']
+  ].reduce((acc, pair) => sub(acc, pair[0], pair[1]), headerTpl)
     + '\n' + stripFrontMatter(c) + '\n' + footerTpl;
   write(path.join(out, '404.html'), html);
 }
@@ -253,6 +265,26 @@ write(path.join(out, 'CNAME'), 'yinorcoffee.com\n');
 if (fs.existsSync(path.join(src, 'admin'))) {
   fs.cpSync(path.join(src, 'admin'), path.join(out, 'admin'), { recursive: true });
   console.log('built: docs/admin (Decap CMS)');
+}
+
+// ---------- guard: fail loudly on unrendered template tokens ----------
+{
+  const leftovers = [];
+  const walk = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) { walk(p); continue; }
+      if (!/\.(html|xml|txt)$/.test(e.name)) continue;
+      const hits = read(p).match(/\{\{[A-Za-z0-9_:]+\}\}/g);
+      if (hits) leftovers.push(`${path.relative(out, p)} -> ${[...new Set(hits)].join(', ')}`);
+    }
+  };
+  walk(out);
+  if (leftovers.length) {
+    console.error('\n!! UNRENDERED TEMPLATE TOKENS FOUND IN BUILD OUTPUT !!');
+    leftovers.forEach(l => console.error('   ' + l));
+    process.exit(1);
+  }
 }
 
 console.log('\n=== Build complete ===');

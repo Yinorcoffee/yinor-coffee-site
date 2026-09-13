@@ -4,43 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{TITLE}}</title>
-  <script>
-    // Redirect Netlify Identity confirm/recovery/invite links to the CMS admin
-    (function () {
-      try {
-        var isAdmin = window.location.pathname.indexOf('/admin') !== -1;
-        if (!isAdmin) {
-          var q = window.location.search || '';
-          var h = window.location.hash || '';
-          var hasQToken = q.indexOf('token=') !== -1 && q.indexOf('type=') !== -1;
-          var hasHToken = h.indexOf('recovery_token=') !== -1 || h.indexOf('confirmation_token=') !== -1 || h.indexOf('invite_token=') !== -1;
-          if (hasQToken || hasHToken) {
-            window.location.replace('/admin/' + h);
-          }
-        }
-      } catch (e) { /* ignore */ }
-    })();
-  </script>
-  <script>
-    // Visitor tracking (Netlify Function + Blobs)
-    (function () {
-      if (window.location.pathname.indexOf('/admin') !== -1) return;
-      try {
-        var ref = document.referrer || '';
-        var refHost = '';
-        try { refHost = ref ? new URL(ref).hostname : ''; } catch (e) { refHost = ref; }
-        fetch('/.netlify/functions/visits', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ path: window.location.pathname, referrer: refHost }),
-          keepalive: true
-        });
-      } catch (e) { /* ignore */ }
-    })();
-  </script>
+  <!--
+    REMOVED 2026-09-13: two dead Netlify <script> blocks lived here.
+      1) Netlify Identity confirm/recovery redirect -> /admin/ (no Netlify backend any more)
+      2) visitor tracking -> POST /.netlify/functions/visits
+    This site is served by GitHub Pages (Server: GitHub.com / Fastly), so every
+    page load fired a request that returned 404. Removed to stop the wasted
+    requests and the console errors.
+  -->
   <meta name="description" content="{{DESC}}">
   <link rel="canonical" href="{{CANONICAL}}">
   <meta name="robots" content="index, follow">
+  <!--
+    SEARCH CONSOLE VERIFICATION - ACTION REQUIRED
+    Without these, a brand-new site with no inbound links can sit in
+    "Discovered - currently not indexed" for a very long time, because Google
+    has no dependable signal that anyone wants this site indexed.
+      1. Google Search Console -> https://search.google.com/search-console
+         Add property "yinorcoffee.com" (Domain property) and verify by DNS TXT
+         record, OR add a URL-prefix property and paste the token below.
+      2. Bing Webmaster Tools -> https://www.bing.com/webmasters
+         Fastest route: import directly from Search Console.
+    Then submit https://yinorcoffee.com/sitemap.xml in both and use
+    URL Inspection -> Request indexing for /, /about-us-coffee-beans,
+    /coffee-makers, /coffee-pods-bags and /premium-espresso-blends-coffee-beans.
+  -->
+  <!-- <meta name="google-site-verification" content="PASTE_GOOGLE_TOKEN_HERE"> -->
+  <!-- <meta name="msvalidate.01" content="PASTE_BING_TOKEN_HERE"> -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Yinor Coffee">
   <meta property="og:title" content="{{OG_TITLE}}">
@@ -58,6 +48,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/style.css?v=5">
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "39282152e3a74ae6a139b420a9de73e0"}'></script>
+  <!--
+    Organization structured data.
+    CHANGED 2026-09-13 - the old "sameAs" array was actively harmful. It contained:
+      * https://www.facebook.com/Jack%20Chen   -> encodes a SPACE; not a resolvable page id
+      * https://www.tiktok.com/@jackchen       -> a generic handle, not this company
+      * https://www.linkedin.com/in/泉兴-李-... -> a PERSONAL profile (/in/), not a company page
+    sameAs is a public assertion that "the entity on this site IS the entity at this
+    URL". Pointing it at a stranger's TikTok or an employee's personal profile makes
+    Google merge the wrong entity into your brand - the exact opposite of the goal.
+    only URLs that (a) resolve and (b) are ABOUT THE COMPANY belong here.
+
+    TODO (add when they exist, then delete this comment):
+      * LinkedIn COMPANY page  -> https://www.linkedin.com/company/<slug>/
+      * Facebook PAGE (not a personal profile)
+      * postalCode for the Wuchuan address (confirm the real one; do not guess)
+      * foundingDate (ISO 8601, e.g. "2026-03-15") - use the date on the business licence
+      * taxID / vatID with the 统一社会信用代码
+  -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -65,18 +73,18 @@
     "name": "Zhanjiang Yinor International Trade Co., Ltd.",
     "alternateName": "Yinor Coffee",
     "url": "https://yinorcoffee.com",
+    "description": "Coffee export and sourcing partner in Zhanjiang, China. Roasted coffee beans, drip bag coffee, capsules and coffee machines, with combined mixed orders, QC, customs clearance and logistics for importers, supermarkets and coffee brands worldwide.",
     "email": "nina@yinorcoffee.com",
+    "telephone": "+86-178-0658-2525",
     "logo": "https://yinorcoffee.com/assets/img/logo.png",
     "sameAs": [
-      "https://www.linkedin.com/in/%E6%B3%89%E5%85%B4-%E6%9D%8E-84903a131/",
-      "https://www.facebook.com/Jack%20Chen",
-      "https://www.instagram.com/yinor02/",
-      "https://www.tiktok.com/@jackchen"
+      "https://www.instagram.com/yinor02/"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+86-178-0658-2525",
       "contactType": "sales",
+      "email": "nina@yinorcoffee.com",
       "availableLanguage": ["English", "Chinese"]
     },
     "address": {
@@ -86,6 +94,15 @@
       "addressRegion": "Guangdong",
       "addressCountry": "CN"
     }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Yinor Coffee",
+    "alternateName": ["Zhanjiang Yinor International Trade Co., Ltd.", "Yinor Coffee Wholesale"],
+    "url": "https://yinorcoffee.com"
   }
   </script>
 </head>
