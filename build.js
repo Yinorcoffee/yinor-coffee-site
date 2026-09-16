@@ -255,7 +255,32 @@ write(path.join(out, 'sitemap.xml'),
 
 // ---------- _redirects (Netlify) ----------
 write(path.join(out, '_redirects'),
-  '/product-catalog  /premium-espresso-blends-coffee-beans  301\n/home  /  301\n');
+  '/product-catalog  /premium-espresso-blends-coffee-beans  301\n/home  /  301\n/about-us  /about-us-coffee-beans/  301\n');
+
+// ---------- legacy URL redirects for GitHub Pages (meta refresh + canonical) ----------
+// GitHub Pages has no server-side redirects, so each legacy path gets a lightweight
+// redirect page: canonical points at the real URL and the browser is forwarded there.
+const legacyRedirects = [
+  ['about-us', '/about-us-coffee-beans/'],
+  ['about', '/about-us-coffee-beans/'],
+  ['contact', '/request-a-consultation-coffee-wholesale-inquiry/'],
+  ['products', '/premium-espresso-blends-coffee-beans/']
+];
+for (const [from, to] of legacyRedirects) {
+  const target = domain + to;
+  write(path.join(out, from, 'index.html'),
+    '<!DOCTYPE html>\n<html lang="en">\n<head>\n' +
+    '  <meta charset="UTF-8">\n' +
+    `  <title>Redirecting | Yinor Coffee</title>\n` +
+    `  <link rel="canonical" href="${target}">\n` +
+    '  <meta name="robots" content="noindex, follow">\n' +
+    `  <meta http-equiv="refresh" content="0; url=${target}">\n` +
+    `  <script>window.location.replace(${JSON.stringify(target)});</script>\n` +
+    '</head>\n<body>\n' +
+    `  <p>Redirecting to <a href="${to}">${target}</a>...</p>\n` +
+    '</body>\n</html>\n');
+  console.log('built redirect:', from, '->', to);
+}
 
 // ---------- GitHub Pages helper ----------
 write(path.join(out, '.nojekyll'), '');
