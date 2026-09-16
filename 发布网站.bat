@@ -34,7 +34,7 @@ git -c user.name="yinor" -c user.email="yinor@yinorcoffee.com" commit -m "Update
 echo.
 
 echo [4/4] 发布到线上（GitHub Pages）...
-set AUTH=eWlub3I6Z2l0aHViX3BhdF8xMUNNQ1daU1EwQ2lISGp6cTR0d2xiX3VpZnBzVkdKNm1HSGpJV0xmZXF4ZHJCUmFFeHpLMTYwUEgzWFBaR2liNEVFRkg0WFFUS0lybjZTZkNq
+set AUTH=WWlub3Jjb2ZmZWU6Z2hwX2dETm9mcnVFbFJ3S2VDcWpjbm5meUNjM1ROemtOZDFSdkNRWQ==
 git -c http.proxy=http://localhost:1080 -c http.extraheader="AUTHORIZATION: basic %AUTH%" push origin main
 if %errorlevel% neq 0 (
   echo.
