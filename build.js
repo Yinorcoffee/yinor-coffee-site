@@ -67,7 +67,8 @@ const crumbTrail = {
   premium: [['/', 'Home'], ['/premium-espresso-blends-coffee-beans', 'Whole Bean Coffee'], ['/premium-espresso-coffee-beans', 'Premium Espresso Blends']],
   soe: [['/', 'Home'], ['/premium-espresso-blends-coffee-beans', 'Whole Bean Coffee'], ['/single-origin-espresso-soe-coffee-beans', 'Single Origin Espresso (SOE)']],
   pods: [['/', 'Home'], ['/coffee-pods-bags', 'Coffee Pods & Bags']],
-  makers: [['/', 'Home'], ['/coffee-makers', 'Coffee Makers']]
+  makers: [['/', 'Home'], ['/coffee-makers', 'Coffee Makers']],
+  accessories: [['/', 'Home'], ['/coffee-accessories', 'Coffee Accessories']]
 };
 function breadcrumbJsonLd(slug, pname, category) {
   const trail = crumbTrail[category] || [['/', 'Home']];
@@ -181,6 +182,7 @@ function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
   html = html.replace(/\{\{PRODUCT_GRID:soe\}\}/g, productGrid('soe'));
   html = html.replace(/\{\{PRODUCT_GRID:pods\}\}/g, productGrid('pods'));
   html = html.replace(/\{\{PRODUCT_GRID:makers\}\}/g, productGrid('makers'));
+  html = html.replace(/\{\{PRODUCT_GRID:accessories\}\}/g, productGrid('accessories'));
   html = html.replace(/\{\{HOME_PRODUCTS\}\}/g, homeProducts);
   html = html.replace(/\{\{POST_LIST\}\}/g, postList);
   if (html.indexOf('{{GALLERY}}') !== -1) {
@@ -213,6 +215,7 @@ const pages = [
   { f: 'single-origin-espresso-soe-coffee-beans.body.html', s: 'single-origin-espresso-soe-coffee-beans', i: false, p: '0.8' },
   { f: 'coffee-makers.body.html', s: 'coffee-makers', i: false, p: '0.7' },
   { f: 'coffee-pods-bags.body.html', s: 'coffee-pods-bags', i: false, p: '0.7' },
+  { f: 'coffee-accessories.body.html', s: 'coffee-accessories', i: false, p: '0.7' },
   { f: 'about-us-coffee-beans.body.html', s: 'about-us-coffee-beans', i: false, p: '0.6' },
   { f: 'request-a-consultation-coffee-wholesale-inquiry.body.html', s: 'request-a-consultation-coffee-wholesale-inquiry', i: false, p: '0.6' },
   { f: 'blog.body.html', s: 'blog', i: false, p: '0.6' },
