@@ -36,6 +36,18 @@ h3 { font-size: 1.15rem; }
 p { margin-bottom: 1em; }
 .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
 
+/* ---------- Google Translate (site-wide language switcher) ---------- */
+/* Keep Google's own banner/highlighting out of the way; the nav switcher drives it. */
+.goog-te-banner-frame, #goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt { display: none !important; }
+body { top: 0 !important; }
+.goog-text-highlight { background: none !important; box-shadow: none !important; }
+.goog-logo-link, .goog-te-gadget span { display: none !important; }
+.goog-te-gadget { font-size: 0 !important; }
+#google_translate_element { position: absolute !important; left: -9999px !important; }
+.lang-switch > a { white-space: nowrap; }
+/* Arabic: let the translated page breathe (RTL is applied by the translator) */
+html[dir="rtl"] body { direction: rtl; text-align: right; }
+
 /* ---------- Header / Nav ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
