@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /assets/download/
 
 Sitemap: https://yinorcoffee.com/sitemap.xml

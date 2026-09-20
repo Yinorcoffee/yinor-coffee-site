@@ -219,6 +219,7 @@ const pages = [
   { f: 'about-us-coffee-beans.body.html', s: 'about-us-coffee-beans', i: false, p: '0.6' },
   { f: 'request-a-consultation-coffee-wholesale-inquiry.body.html', s: 'request-a-consultation-coffee-wholesale-inquiry', i: false, p: '0.6' },
   { f: 'blog.body.html', s: 'blog', i: false, p: '0.6' },
+  { f: 'catalog-download.body.html', s: 'catalog-download', i: false, p: '0.6' },
   { f: 'privacy-policy.body.html', s: 'privacy-policy', i: false, p: '0.3' },
   { f: 'terms-and-conditions.body.html', s: 'terms-and-conditions', i: false, p: '0.3' },
   { f: 'product-catalog.body.html', s: 'product-catalog', i: false, p: '0.0', x: true },
@@ -249,7 +250,7 @@ for (const p of posts) buildPage(path.join(src, 'posts', p.slug + '.body.html'),
 }
 
 // ---------- robots.txt ----------
-write(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${domain}/sitemap.xml\n`);
+write(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /assets/download/\n\nSitemap: ${domain}/sitemap.xml\n`);
 
 // ---------- sitemap.xml ----------
 write(path.join(out, 'sitemap.xml'),
