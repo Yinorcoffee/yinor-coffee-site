@@ -14,23 +14,27 @@ ogimage: /assets/img/hero-products.jpg
 <section class="section">
   <div class="container" style="display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start;">
     <div>
-      <div class="notice">Tell us where to send it - fill in your business details below and the download link appears immediately. We will also email you the catalogue for your records.</div>
+      <div class="notice">Fill in your business details below - the download link appears immediately. Your email goes straight to our wholesale team, so we can follow up with pricing and samples.</div>
 
-      <form class="contact-form" id="catalogueForm" onsubmit="return submitCatalogue(this)">
+      <!-- Posts directly to the Brevo form endpoint (public address, safe to expose).
+           The response is received by the hidden iframe below, so the visitor never leaves this page. -->
+      <form class="contact-form" id="catalogueForm"
+            action="https://2275c7d3.sibforms.com/serve/MUIFAN9aam6xpYOljRtRc9FqFu2csyM2oLwd89DB7VoM8CZM50blez35jv0xjRfic7Du-hwHKoKo0F1xpzLNTW_MzXfbjmXygXuUEyaGAQPMHt2auzi3IPZBntpdEjyJtt8x1D9wLBcAGlE790jAMLZ6wyUxa0byU3Bm-sSevmHVKjXJVjcf370Eyf1aSRierCTbZw6KJiA1yzdFdA=="
+            method="POST" target="brevoSink" onsubmit="return submitCatalogue(this)">
         <label for="cat-name">Name *</label>
-        <input type="text" id="cat-name" name="Name" required>
+        <input type="text" id="cat-name" name="FIRSTNAME" required>
 
         <label for="cat-company">Company *</label>
-        <input type="text" id="cat-company" name="Company" required>
+        <input type="text" id="cat-company" name="COMPANY" required>
 
         <label for="cat-email">Business Email *</label>
-        <input type="email" id="cat-email" name="Email" required>
+        <input type="email" id="cat-email" name="EMAIL" required>
 
         <label for="cat-country">Country / Market</label>
-        <input type="text" id="cat-country" name="Country" placeholder="e.g. Spain, Hong Kong, Kenya">
+        <input type="text" id="cat-country" name="COUNTRY" placeholder="e.g. Spain, Hong Kong, Kenya">
 
         <label for="cat-interest">What are you sourcing? *</label>
-        <select id="cat-interest" name="Interest" required>
+        <select id="cat-interest" name="INTEREST" required>
           <option value="">Select a product line...</option>
           <option>Whole bean coffee (blends / single origin)</option>
           <option>Coffee makers / machines</option>
@@ -42,15 +46,21 @@ ogimage: /assets/img/hero-products.jpg
         </select>
 
         <label for="cat-details">Anything specific you need?</label>
-        <textarea id="cat-details" name="Details" rows="4" placeholder="Volume, target price, packaging, certifications, timeline..."></textarea>
+        <textarea id="cat-details" name="DETAILS" rows="4" placeholder="Volume, target price, packaging, certifications, timeline..."></textarea>
+
+        <!-- Brevo anti-bot field: must stay empty -->
+        <input type="text" name="email_address_check" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="locale" value="en">
 
         <button class="btn btn-primary" type="submit">Get the Catalogue</button>
       </form>
+      <iframe name="brevoSink" id="brevoSink" title="Form submission receiver" style="position:absolute;width:0;height:0;border:0;visibility:hidden;"></iframe>
 
       <div id="catalogueResult" style="display:none;margin-top:22px;padding:22px;border:2px solid var(--amber);border-radius:var(--radius);background:var(--cream-2);">
         <h3 style="margin-top:0;">Thank you! Your catalogue is ready.</h3>
-        <p>Click below to download the full Yinor Coffee catalogue (PDF). We have also noted your details and will follow up within 1-2 business days.</p>
+        <p>Click below to download the full Yinor Coffee catalogue (PDF). We also have your email on our wholesale list and will follow up within 1-2 business days.</p>
         <p class="mt-2"><a class="btn btn-primary" id="catalogueDownload" href="/assets/download/yinor-coffee-catalogue-2026-full.pdf" target="_blank" rel="noopener">Download Catalogue (PDF)</a></p>
+        <p style="margin-top:16px;">Need pricing for a specific product line? <a id="catalogueMailto" href="mailto:nina@yinorcoffee.com">Send your sourcing details to our team</a> - one click opens your email with everything filled in.</p>
         <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Tip: bookmark this page so you can return to the download.</p>
       </div>
 
@@ -63,20 +73,26 @@ ogimage: /assets/img/hero-products.jpg
             alert('Please fill in Name, Company, Business Email and the product line you are sourcing.');
             return false;
           }
-          // Show the download immediately so the visitor is never blocked
+
+          // 1) Show the download immediately - the visitor is never blocked
           var box = document.getElementById('catalogueResult');
           box.style.display = 'block';
           box.scrollIntoView({ block: 'center' });
-          // Send the lead to our inbox in the background (opens mail client with details pre-filled)
+
+          // 2) Prepare a one-click "send details" link carrying everything the buyer typed
           var body = 'Catalogue request from yinorcoffee.com\n\n'
             + 'Name: ' + name + '\nCompany: ' + company + '\nBusiness Email: ' + email
             + '\nCountry / Market: ' + (country || '-') + '\nSourcing: ' + interest;
           if (details) body += '\n\nDetails:\n' + details;
           var subject = 'Catalogue request - ' + company + ' (' + interest + ')';
-          try {
-            window.open('mailto:nina@yinorcoffee.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body), '_blank');
-          } catch (e) { /* download still works even if the mail client cannot open */ }
-          return false;
+          var link = document.getElementById('catalogueMailto');
+          if (link) {
+            link.href = 'mailto:nina@yinorcoffee.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+          }
+
+          // 3) Return true so the browser posts the form to the Brevo endpoint
+          //    through the hidden iframe - the buyer's email lands in the Brevo list.
+          return true;
         }
       </script>
     </div>
