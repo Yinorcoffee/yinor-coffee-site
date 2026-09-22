@@ -250,7 +250,7 @@
           <a class="btn btn-primary" id="inqEmail" href="mailto:nina@yinorcoffee.com">Send by Email</a>
           <a class="btn btn-dark" id="inqWhatsapp" href="https://wa.me/8617806582525" target="_blank" rel="noopener">Send on WhatsApp</a>
         </p>
-        <p style="font-size:0.9rem;margin-top:14px;">If no email window opens, the details have been copied for you - simply paste them into an email to <strong>nina@yinorcoffee.com</strong>.</p>
+        <p style="font-size:0.9rem;margin-top:14px;">This opens a ready-to-send message with all your details. If your browser has no mail app set up, it opens your web inbox instead - and the text is copied as well, so you can paste it into any email to <strong>nina@yinorcoffee.com</strong>.</p>
         <p style="font-size:0.85rem;color:var(--muted);margin-top:10px;">We reply within 1-2 business days. If it is urgent, message us on WhatsApp at +86 178 0658 2525.</p>
       </div>
 
@@ -289,24 +289,28 @@
           var subject = 'Wholesale Inquiry - ' + topic;
           var encBody = encodeURIComponent(msg);
           var encSubject = encodeURIComponent(subject);
-          var gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=nina@yinorcoffee.com&su=' + encSubject + '&body=' + encBody;
+
+          // Pick a web mail composer that matches the visitor's own mailbox
+          function webComposeFor(addr) {
+            var d = (addr.split('@')[1] || '').toLowerCase();
+            if (/^(outlook|hotmail|live|msn)\./.test(d)) {
+              return 'https://outlook.office.com/mail/deeplink/compose?to=nina@yinorcoffee.com&subject=' + encSubject + '&body=' + encBody;
+            }
+            return 'https://mail.google.com/mail/?view=cm&fs=1&to=nina@yinorcoffee.com&su=' + encSubject + '&body=' + encBody;
+          }
 
           // WhatsApp: pre-filled message
           var wa = document.getElementById('inqWhatsapp');
           if (wa) { wa.href = 'https://wa.me/8617806582525?text=' + encodeURIComponent(msg); }
 
-          // Email: try the visitor's own mail app first, fall back to a web compose window
+          // Email: open a web composer straight away (must be synchronous, or the browser blocks it),
+          // and also let the visitor's own mail app take over if one is installed.
           var em = document.getElementById('inqEmail');
           if (em) {
             em.href = 'mailto:nina@yinorcoffee.com?subject=' + encSubject + '&body=' + encBody;
             em.onclick = function () {
               copyInquiryText(msg);
-              setTimeout(function () {
-                // If our page still has focus, no mail application opened - open a web compose window instead
-                if (document.hasFocus && document.hasFocus()) {
-                  window.open(gmailUrl, '_blank');
-                }
-              }, 1500);
+              window.open(webComposeFor(email), '_blank');
               return true;
             };
           }
