@@ -211,7 +211,7 @@
       <div class="notice">Tell us about your business and needs - volume, roast profile, packaging or origin preferences. Our team will reply within 1-2 business days with a tailored quote.</div>
 
       <!-- The email address is registered with our CRM through this endpoint (public address, safe to embed).
-           The inquiry details are then sent by the visitor with one click (WhatsApp / email / copy). -->
+           The inquiry details are then sent by the visitor with one click. -->
       <form class="contact-form" id="inquiryForm"
             action="https://2275c7d3.sibforms.com/serve/MUIFAN9aam6xpYOljRtRc9FqFu2csyM2oLwd89DB7VoM8CZM50blez35jv0xjRfic7Du-hwHKoKo0F1xpzLNTW_MzXfbjmXygXuUEyaGAQPMHt2auzi3IPZBntpdEjyJtt8x1D9wLBcAGlE790jAMLZ6wyUxa0byU3Bm-sSevmHVKjXJVjcf370Eyf1aSRierCTbZw6KJiA1yzdFdA=="
             method="POST" target="brevoSink2" onsubmit="return submitInquiry(this)">
@@ -245,23 +245,32 @@
 
       <div id="inquiryResult" style="display:none;margin-top:22px;padding:22px;border:2px solid var(--amber);border-radius:var(--radius);background:var(--cream-2);">
         <h3 style="margin-top:0;">Almost done - send us your details</h3>
-        <p>Your email address has been registered with our wholesale team. Now pick whichever way is easiest to send us the inquiry details - it only takes one click:</p>
+        <p>Your email address has been registered with our wholesale team. Now send us the inquiry details - one click and everything is filled in for you:</p>
         <p class="mt-2" style="display:flex;flex-wrap:wrap;gap:12px;">
-          <a class="btn btn-primary" id="inqWhatsapp" href="https://wa.me/8617806582525" target="_blank" rel="noopener">Send on WhatsApp</a>
-          <a class="btn btn-dark" id="inqGmail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nina@yinorcoffee.com" target="_blank" rel="noopener">Send with Gmail</a>
-          <button class="btn btn-dark" type="button" id="inqCopy">Copy details</button>
+          <a class="btn btn-primary" id="inqEmail" href="mailto:nina@yinorcoffee.com">Send by Email</a>
+          <a class="btn btn-dark" id="inqWhatsapp" href="https://wa.me/8617806582525" target="_blank" rel="noopener">Send on WhatsApp</a>
         </p>
-        <p style="font-size:0.9rem;margin-top:12px;">Using Outlook, Yahoo or a company mailbox?
-          <a id="inqOutlook" href="https://outlook.office.com/mail/deeplink/compose?to=nina@yinorcoffee.com" target="_blank" rel="noopener">Open Outlook web</a>
-          &nbsp;or&nbsp;
-          <a id="inqMailto" href="mailto:nina@yinorcoffee.com">open your own email app</a>
-          - the details are in the box below either way.</p>
-        <p style="margin-top:14px;">Or copy the text below and paste it into any email to <strong>nina@yinorcoffee.com</strong> (or your WhatsApp / WeChat):</p>
-        <textarea id="inqText" rows="7" readonly style="width:100%;font-family:monospace;font-size:0.85rem;"></textarea>
+        <p style="font-size:0.9rem;margin-top:14px;">If no email window opens, the details have been copied for you - simply paste them into an email to <strong>nina@yinorcoffee.com</strong>.</p>
         <p style="font-size:0.85rem;color:var(--muted);margin-top:10px;">We reply within 1-2 business days. If it is urgent, message us on WhatsApp at +86 178 0658 2525.</p>
       </div>
 
       <script>
+        function copyInquiryText(t) {
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t); return; }
+          } catch (e) { /* fall through */ }
+          try {
+            var ta = document.createElement('textarea');
+            ta.value = t;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+          } catch (e2) { /* nothing else we can do */ }
+        }
+
         function submitInquiry(f) {
           function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
           var name = val('name'), company = val('company'), email = val('email'), topic = val('topic'), details = val('details');
@@ -278,30 +287,27 @@
           if (details) { msg += '\n\nDetails:\n' + details; }
 
           var subject = 'Wholesale Inquiry - ' + topic;
-          var enc = encodeURIComponent(msg);
+          var encBody = encodeURIComponent(msg);
+          var encSubject = encodeURIComponent(subject);
+          var gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=nina@yinorcoffee.com&su=' + encSubject + '&body=' + encBody;
 
+          // WhatsApp: pre-filled message
           var wa = document.getElementById('inqWhatsapp');
-          if (wa) { wa.href = 'https://wa.me/8617806582525?text=' + enc; }
-          var gm = document.getElementById('inqGmail');
-          if (gm) { gm.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=nina@yinorcoffee.com&su=' + encodeURIComponent(subject) + '&body=' + enc; }
-          var ol = document.getElementById('inqOutlook');
-          if (ol) { ol.href = 'https://outlook.office.com/mail/deeplink/compose?to=nina@yinorcoffee.com&subject=' + encodeURIComponent(subject) + '&body=' + enc; }
-          var ml = document.getElementById('inqMailto');
-          if (ml) { ml.href = 'mailto:nina@yinorcoffee.com?subject=' + encodeURIComponent(subject) + '&body=' + enc; }
-          var ta = document.getElementById('inqText');
-          if (ta) { ta.value = msg; }
-          var cp = document.getElementById('inqCopy');
-          if (cp) {
-            cp.onclick = function () {
-              var t = document.getElementById('inqText');
-              t.removeAttribute('readonly');
-              t.select();
-              t.setSelectionRange(0, 99999);
-              try { document.execCommand('copy'); } catch (e) {}
-              t.setAttribute('readonly', 'readonly');
-              window.getSelection().removeAllRanges();
-              cp.textContent = 'Copied!';
-              setTimeout(function () { cp.textContent = 'Copy details'; }, 2500);
+          if (wa) { wa.href = 'https://wa.me/8617806582525?text=' + encodeURIComponent(msg); }
+
+          // Email: try the visitor's own mail app first, fall back to a web compose window
+          var em = document.getElementById('inqEmail');
+          if (em) {
+            em.href = 'mailto:nina@yinorcoffee.com?subject=' + encSubject + '&body=' + encBody;
+            em.onclick = function () {
+              copyInquiryText(msg);
+              setTimeout(function () {
+                // If our page still has focus, no mail application opened - open a web compose window instead
+                if (document.hasFocus && document.hasFocus()) {
+                  window.open(gmailUrl, '_blank');
+                }
+              }, 1500);
+              return true;
             };
           }
 
