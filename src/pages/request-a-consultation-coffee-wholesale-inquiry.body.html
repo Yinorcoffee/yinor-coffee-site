@@ -15,15 +15,20 @@ ogimage: /assets/img/hero-home.jpg
   <div class="container" style="display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start;">
     <div>
       <div class="notice">Tell us about your business and needs - volume, roast profile, packaging or origin preferences. Our team will reply within 1-2 business days with a tailored quote.</div>
-      <form class="contact-form" onsubmit="return submitInquiry(this)">
+
+      <!-- The email address is registered with our CRM through this endpoint (public address, safe to embed).
+           The inquiry details are then sent by the visitor with one click (WhatsApp / email / copy). -->
+      <form class="contact-form" id="inquiryForm"
+            action="https://2275c7d3.sibforms.com/serve/MUIFAN9aam6xpYOljRtRc9FqFu2csyM2oLwd89DB7VoM8CZM50blez35jv0xjRfic7Du-hwHKoKo0F1xpzLNTW_MzXfbjmXygXuUEyaGAQPMHt2auzi3IPZBntpdEjyJtt8x1D9wLBcAGlE790jAMLZ6wyUxa0byU3Bm-sSevmHVKjXJVjcf370Eyf1aSRierCTbZw6KJiA1yzdFdA=="
+            method="POST" target="brevoSink2" onsubmit="return submitInquiry(this)">
         <label for="name">Name *</label>
-        <input type="text" id="name" name="Name" required>
+        <input type="text" id="name" name="FIRSTNAME" required>
         <label for="company">Company Name</label>
-        <input type="text" id="company" name="Company">
+        <input type="text" id="company" name="COMPANY">
         <label for="email">Business Email *</label>
-        <input type="email" id="email" name="Email" required>
+        <input type="email" id="email" name="EMAIL" required>
         <label for="topic">Wholesale Inquiry *</label>
-        <select id="topic" name="InquiryType" required>
+        <select id="topic" name="INTEREST" required>
           <option value="">Select a topic...</option>
           <option>Whole bean coffee (blends / single origin)</option>
           <option>Coffee makers / machines</option>
@@ -34,21 +39,79 @@ ogimage: /assets/img/hero-home.jpg
           <option>Other</option>
         </select>
         <label for="details">Request Details</label>
-        <textarea id="details" name="Details" rows="6" placeholder="Volume, target roast, origin preferences, packaging, timeline..."></textarea>
-        <button class="btn btn-primary" type="submit">Send Inquiry by Email</button>
+        <textarea id="details" name="DETAILS" rows="6" placeholder="Volume, target roast, origin preferences, packaging, timeline..."></textarea>
+
+        <!-- CRM anti-bot field: must stay empty -->
+        <input type="text" name="email_address_check" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="locale" value="en">
+
+        <button class="btn btn-primary" type="submit">Send Inquiry</button>
       </form>
+      <iframe name="brevoSink2" id="brevoSink2" title="Form submission receiver" style="position:absolute;width:0;height:0;border:0;visibility:hidden;"></iframe>
+
+      <div id="inquiryResult" style="display:none;margin-top:22px;padding:22px;border:2px solid var(--amber);border-radius:var(--radius);background:var(--cream-2);">
+        <h3 style="margin-top:0;">Almost done - send us your details</h3>
+        <p>Your email address has been registered with our wholesale team. Now pick whichever way is easiest to send us the inquiry details - it only takes one click:</p>
+        <p class="mt-2" style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a class="btn btn-primary" id="inqWhatsapp" href="https://wa.me/8617806582525" target="_blank" rel="noopener">Send on WhatsApp</a>
+          <a class="btn btn-dark" id="inqMailto" href="mailto:nina@yinorcoffee.com">Send by Email</a>
+          <button class="btn btn-dark" type="button" id="inqCopy">Copy details</button>
+        </p>
+        <p style="margin-top:14px;">Or copy the text below and paste it into any email to <strong>nina@yinorcoffee.com</strong> (or your WhatsApp / WeChat):</p>
+        <textarea id="inqText" rows="7" readonly style="width:100%;font-family:monospace;font-size:0.85rem;"></textarea>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:10px;">We reply within 1-2 business days. If it is urgent, message us on WhatsApp at +86 178 0658 2525.</p>
+      </div>
+
       <script>
         function submitInquiry(f) {
           function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
           var name = val('name'), company = val('company'), email = val('email'), topic = val('topic'), details = val('details');
-          if (!name || !email || !topic) { alert('Please fill in Name, Business Email and Inquiry topic.'); return false; }
-          var body = 'Name: ' + name + '\nCompany: ' + company + '\nBusiness Email: ' + email + '\nInquiry: ' + topic;
-          if (details) body += '\n\nDetails:\n' + details;
-          var subject = 'Wholesale Inquiry from yinorcoffee.com - ' + topic;
-          window.location.href = 'mailto:nina@yinorcoffee.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-          return false;
+          if (!name || !email || !topic) {
+            alert('Please fill in Name, Business Email and Inquiry topic.');
+            return false;
+          }
+
+          var msg = 'Wholesale inquiry from yinorcoffee.com\n\n'
+            + 'Name: ' + name + '\n'
+            + 'Company: ' + (company || '-') + '\n'
+            + 'Business Email: ' + email + '\n'
+            + 'Inquiry: ' + topic;
+          if (details) { msg += '\n\nDetails:\n' + details; }
+
+          var subject = 'Wholesale Inquiry - ' + topic;
+          var enc = encodeURIComponent(msg);
+
+          var wa = document.getElementById('inqWhatsapp');
+          if (wa) { wa.href = 'https://wa.me/8617806582525?text=' + enc; }
+          var ml = document.getElementById('inqMailto');
+          if (ml) { ml.href = 'mailto:nina@yinorcoffee.com?subject=' + encodeURIComponent(subject) + '&body=' + enc; }
+          var ta = document.getElementById('inqText');
+          if (ta) { ta.value = msg; }
+          var cp = document.getElementById('inqCopy');
+          if (cp) {
+            cp.onclick = function () {
+              var t = document.getElementById('inqText');
+              t.removeAttribute('readonly');
+              t.select();
+              t.setSelectionRange(0, 99999);
+              try { document.execCommand('copy'); } catch (e) {}
+              t.setAttribute('readonly', 'readonly');
+              window.getSelection().removeAllRanges();
+              cp.textContent = 'Copied!';
+              setTimeout(function () { cp.textContent = 'Copy details'; }, 2500);
+            };
+          }
+
+          // Show the next step immediately - the visitor is never left wondering
+          var box = document.getElementById('inquiryResult');
+          box.style.display = 'block';
+          box.scrollIntoView({ block: 'center' });
+
+          // Return true so the browser also registers the email with our CRM (hidden iframe)
+          return true;
         }
       </script>
+
       <p class="mt-1" style="font-size:0.85rem;color:var(--muted);">Prefer chat? Reach us directly on WhatsApp or email.</p>
     </div>
     <div class="contact-info" style="background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow);">
