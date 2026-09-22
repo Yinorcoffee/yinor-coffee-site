@@ -54,9 +54,14 @@ ogimage: /assets/img/hero-home.jpg
         <p>Your email address has been registered with our wholesale team. Now pick whichever way is easiest to send us the inquiry details - it only takes one click:</p>
         <p class="mt-2" style="display:flex;flex-wrap:wrap;gap:12px;">
           <a class="btn btn-primary" id="inqWhatsapp" href="https://wa.me/8617806582525" target="_blank" rel="noopener">Send on WhatsApp</a>
-          <a class="btn btn-dark" id="inqMailto" href="mailto:nina@yinorcoffee.com">Send by Email</a>
+          <a class="btn btn-dark" id="inqGmail" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nina@yinorcoffee.com" target="_blank" rel="noopener">Send with Gmail</a>
           <button class="btn btn-dark" type="button" id="inqCopy">Copy details</button>
         </p>
+        <p style="font-size:0.9rem;margin-top:12px;">Using Outlook, Yahoo or a company mailbox?
+          <a id="inqOutlook" href="https://outlook.office.com/mail/deeplink/compose?to=nina@yinorcoffee.com" target="_blank" rel="noopener">Open Outlook web</a>
+          &nbsp;or&nbsp;
+          <a id="inqMailto" href="mailto:nina@yinorcoffee.com">open your own email app</a>
+          - the details are in the box below either way.</p>
         <p style="margin-top:14px;">Or copy the text below and paste it into any email to <strong>nina@yinorcoffee.com</strong> (or your WhatsApp / WeChat):</p>
         <textarea id="inqText" rows="7" readonly style="width:100%;font-family:monospace;font-size:0.85rem;"></textarea>
         <p style="font-size:0.85rem;color:var(--muted);margin-top:10px;">We reply within 1-2 business days. If it is urgent, message us on WhatsApp at +86 178 0658 2525.</p>
@@ -83,6 +88,10 @@ ogimage: /assets/img/hero-home.jpg
 
           var wa = document.getElementById('inqWhatsapp');
           if (wa) { wa.href = 'https://wa.me/8617806582525?text=' + enc; }
+          var gm = document.getElementById('inqGmail');
+          if (gm) { gm.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=nina@yinorcoffee.com&su=' + encodeURIComponent(subject) + '&body=' + enc; }
+          var ol = document.getElementById('inqOutlook');
+          if (ol) { ol.href = 'https://outlook.office.com/mail/deeplink/compose?to=nina@yinorcoffee.com&subject=' + encodeURIComponent(subject) + '&body=' + enc; }
           var ml = document.getElementById('inqMailto');
           if (ml) { ml.href = 'mailto:nina@yinorcoffee.com?subject=' + encodeURIComponent(subject) + '&body=' + enc; }
           var ta = document.getElementById('inqText');
