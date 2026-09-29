@@ -237,23 +237,22 @@
         <input type="text" name="email_address_check" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input type="hidden" name="locale" value="en">
 
-        <button class="btn btn-primary" type="submit" id="inqSubmit">Send by Email</button>
+        <button class="btn btn-primary" type="submit" id="inqSubmit">Send Inquiry</button>
       </form>
       <iframe name="brevoSink2" id="brevoSink2" title="Form submission receiver" style="position:absolute;width:0;height:0;border:0;visibility:hidden;"></iframe>
 
-      <div id="inquiryResult" style="display:none;margin-top:22px;padding:22px;border:2px solid var(--amber);border-radius:var(--radius);background:var(--cream-2);">
-        <h3 id="inqTitle" style="margin-top:0;">Sending your inquiry...</h3>
-        <p id="inqMsg">Please wait a moment, this only takes a second.</p>
-        <p class="mt-2" id="inqActions" style="display:none;">
-          <a class="btn btn-dark" id="inqWhatsapp" href="https://wa.me/8617806582525" target="_blank" rel="noopener">Send on WhatsApp instead</a>
+      <div id="inquiryResult" style="display:none;margin-top:22px;padding:24px;border:2px solid var(--amber);border-radius:var(--radius);background:var(--cream-2);">
+        <h3 style="margin-top:0;">Step 2 - send us your details</h3>
+        <p>Your email address is registered with our wholesale team. Now send us the details - <strong>the message is already written for you</strong>, just press send:</p>
+        <p style="margin:18px 0;">
+          <a class="btn btn-primary" id="inqWhatsapp" href="https://wa.me/8617806582525" target="_blank" rel="noopener"
+             style="font-size:1.1rem;padding:16px 32px;display:inline-block;">Send on WhatsApp &rarr;</a>
         </p>
-        <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Email <strong>nina@yinorcoffee.com</strong> &middot; WhatsApp <strong>+86 178 0658 2525</strong></p>
+        <p style="font-size:0.9rem;margin-top:6px;">Prefer email? <a id="inqMailto" href="mailto:nina@yinorcoffee.com">Open your email app</a> - the same message is filled in there too.</p>
+        <p style="font-size:0.85rem;color:var(--muted);margin-top:14px;">We reply within 1-2 business days. Direct contact: <strong>nina@yinorcoffee.com</strong> &middot; WhatsApp <strong>+86 178 0658 2525</strong></p>
       </div>
 
       <script>
-        // The inquiry is emailed straight to our team through this public form relay.
-        var INQUIRY_ENDPOINT = 'https://formsubmit.co/ajax/nina@yinorcoffee.com';
-
         function submitInquiry(f) {
           function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
           var name = val('name'), company = val('company'), email = val('email'), topic = val('topic'), details = val('details');
@@ -262,75 +261,45 @@
             return false;
           }
 
-          var box = document.getElementById('inquiryResult');
-          var title = document.getElementById('inqTitle');
-          var msg = document.getElementById('inqMsg');
-          var actions = document.getElementById('inqActions');
-          var btn = document.getElementById('inqSubmit');
-
-          box.style.display = 'block';
-          title.textContent = 'Sending your inquiry...';
-          msg.textContent = 'Please wait a moment, this only takes a second.';
-          actions.style.display = 'none';
-          if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-          box.scrollIntoView({ block: 'center' });
-
-          // WhatsApp fallback, pre-filled with the same details
-          var waText = 'Wholesale inquiry from yinorcoffee.com\n\n'
+          var msg = 'Wholesale inquiry from yinorcoffee.com\n\n'
             + 'Name: ' + name + '\n'
             + 'Company: ' + (company || '-') + '\n'
             + 'Business Email: ' + email + '\n'
             + 'Inquiry: ' + topic;
-          if (details) { waText += '\n\nDetails:\n' + details; }
+          if (details) { msg += '\n\nDetails:\n' + details; }
+
+          var subject = 'Wholesale Inquiry - ' + topic;
+
+          // Primary channel: WhatsApp - pre-filled, one press to send
           var wa = document.getElementById('inqWhatsapp');
-          if (wa) { wa.href = 'https://wa.me/8617806582525?text=' + encodeURIComponent(waText); }
+          if (wa) { wa.href = 'https://wa.me/8617806582525?text=' + encodeURIComponent(msg); }
 
-          function done(ok, errorText) {
-            if (btn) { btn.disabled = false; btn.textContent = 'Send by Email'; }
-            if (ok) {
-              title.textContent = 'Thank you - your inquiry has been sent';
-              msg.textContent = 'Our wholesale team has received your details and will reply within 1-2 business days with a tailored quote.';
-              actions.style.display = 'none';
-            } else {
-              title.textContent = 'We could not send it automatically';
-              msg.textContent = (errorText ? errorText + ' ' : '') + 'Please send the same details on WhatsApp instead - it is pre-filled for you.';
-              actions.style.display = 'block';
-            }
-          }
+          // Secondary channel: the visitor's own email application
+          var ml = document.getElementById('inqMailto');
+          if (ml) { ml.href = 'mailto:nina@yinorcoffee.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(msg); }
 
-          var payload = {
-            _subject: 'Wholesale Inquiry - ' + topic,
-            _template: 'table',
-            Name: name,
-            Company: company || '-',
-            'Business Email': email,
-            Inquiry: topic,
-            Details: details || '-',
-            Source: 'yinorcoffee.com quote form'
-          };
+          // Show the next step straight away - the visitor is never left wondering
+          var box = document.getElementById('inquiryResult');
+          box.style.display = 'block';
+          box.scrollIntoView({ block: 'center' });
 
-          var finished = false;
-          var timer = setTimeout(function () { if (!finished) { finished = true; done(false, ''); } }, 12000);
-
+          // Best-effort background copy by email (silent - never blocks the visitor)
           try {
-            fetch(INQUIRY_ENDPOINT, {
+            fetch('https://formsubmit.co/ajax/nina@yinorcoffee.com', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify(payload)
-            }).then(function (res) { return res.json(); }).then(function (data) {
-              if (finished) { return; }
-              finished = true; clearTimeout(timer);
-              if (data && String(data.success) === 'true') { done(true); }
-              else { done(false, (data && data.message) ? data.message : ''); }
-            }).catch(function () {
-              if (finished) { return; }
-              finished = true; clearTimeout(timer);
-              done(false, '');
-            });
-          } catch (e) {
-            finished = true; clearTimeout(timer);
-            done(false, '');
-          }
+              body: JSON.stringify({
+                _subject: subject,
+                _template: 'table',
+                Name: name,
+                Company: company || '-',
+                'Business Email': email,
+                Inquiry: topic,
+                Details: details || '-',
+                Source: 'yinorcoffee.com quote form'
+              })
+            }).catch(function () { /* silent */ });
+          } catch (e) { /* silent */ }
 
           // Return true so the browser also registers the email with our CRM (hidden iframe)
           return true;
