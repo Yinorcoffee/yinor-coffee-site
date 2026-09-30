@@ -200,7 +200,10 @@ function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
     ['{{CANONICAL}}', canonical],
     ['{{OG_TITLE}}', fm.title || 'Yinor Coffee - Wholesale Specialty Coffee Beans'],
     ['{{OG_DESC}}', fm.desc || 'Wholesale specialty coffee beans from China. Custom roasting, private label & OEM for cafes and roasters.'],
-    ['{{OG_IMAGE}}', ogImage]
+    ['{{OG_IMAGE}}', ogImage],
+    // Per-page robots directive: front matter `robots: noindex, follow` wins,
+    // everything else stays indexable.
+    ['{{ROBOTS}}', fm.robots || 'index, follow']
   ].reduce((acc, pair) => sub(acc, pair[0], pair[1]), headerTpl)
     + '\n' + body + '\n' + footerTpl;
 
@@ -280,7 +283,11 @@ for (const p of posts) buildPage(path.join(src, 'posts', p.slug + '.body.html'),
     ['{{CANONICAL}}', domain + '/404.html'],
     ['{{OG_TITLE}}', fm.title || ''],
     ['{{OG_DESC}}', fm.desc || ''],
-    ['{{OG_IMAGE}}', '/assets/img/hero-home.jpg']
+    ['{{OG_IMAGE}}', '/assets/img/hero-home.jpg'],
+    // The 404 page is rendered on its own code path, so it needs the same
+    // per-page robots substitution the normal pages get. A 404 already answers
+    // with HTTP 404, so keep it indexable-agnostic but never leave the raw token.
+    ['{{ROBOTS}}', fm.robots || 'noindex, follow']
   ].reduce((acc, pair) => sub(acc, pair[0], pair[1]), headerTpl)
     + '\n' + stripFrontMatter(c) + '\n' + footerTpl;
   write(path.join(out, '404.html'), html);
