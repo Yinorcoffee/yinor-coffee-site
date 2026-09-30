@@ -61,29 +61,57 @@ if (fs.existsSync(galleryMapFile)) {
 
 const catLabel = { regular: 'Regular Espresso Blend', premium: 'Premium Espresso Blend', soe: 'Single Origin Espresso' };
 
-// Breadcrumb trail per product category (for BreadcrumbList structured data)
+// Breadcrumb trails (for BreadcrumbList structured data).
+// Every item URL uses the CANONICAL form (leading slash, trailing slash on
+// sub-pages, exactly as <link rel="canonical"> renders it) so the breadcrumb
+// never points at a URL that only exists as a 301 redirect.
+//
+// Product trails: category pages only - the product itself is appended by
+// breadcrumbJsonLd(). Mirrors the main navigation labels in partials/header.html.
 const crumbTrail = {
-  regular: [['/', 'Home'], ['/premium-espresso-blends-coffee-beans', 'Whole Bean Coffee'], ['/regular-espresso-blends-coffee-beans', 'Regular Espresso Blends']],
-  premium: [['/', 'Home'], ['/premium-espresso-blends-coffee-beans', 'Whole Bean Coffee'], ['/premium-espresso-coffee-beans', 'Premium Espresso Blends']],
-  soe: [['/', 'Home'], ['/premium-espresso-blends-coffee-beans', 'Whole Bean Coffee'], ['/single-origin-espresso-soe-coffee-beans', 'Single Origin Espresso (SOE)']],
-  pods: [['/', 'Home'], ['/coffee-pods-bags', 'Coffee Pods & Bags']],
-  makers: [['/', 'Home'], ['/coffee-makers', 'Coffee Makers']],
-  accessories: [['/', 'Home'], ['/coffee-accessories', 'Coffee Accessories']]
+  regular: [['/', 'Home'], ['/premium-espresso-blends-coffee-beans/', 'Whole Bean Coffee'], ['/regular-espresso-blends-coffee-beans/', 'Regular Espresso Blends']],
+  premium: [['/', 'Home'], ['/premium-espresso-blends-coffee-beans/', 'Whole Bean Coffee'], ['/premium-espresso-coffee-beans/', 'Premium Espresso Blends']],
+  soe: [['/', 'Home'], ['/premium-espresso-blends-coffee-beans/', 'Whole Bean Coffee'], ['/single-origin-espresso-soe-coffee-beans/', 'Single Origin Espresso (SOE)']],
+  pods: [['/', 'Home'], ['/coffee-pods-bags/', 'Coffee Pods & Bags']],
+  makers: [['/', 'Home'], ['/coffee-makers/', 'Coffee Makers']],
+  accessories: [['/', 'Home'], ['/coffee-accessories/', 'Coffee Accessories']]
 };
-function breadcrumbJsonLd(slug, pname, category) {
-  const trail = crumbTrail[category] || [['/', 'Home']];
+
+// Non-product pages: the FULL trail including the page itself as the last item.
+// The homepage is deliberately absent - a one-item breadcrumb carries no
+// information and Google ignores it.
+const pageTrail = {
+  'premium-espresso-blends-coffee-beans': [['/', 'Home'], ['/premium-espresso-blends-coffee-beans/', 'Whole Bean Coffee']],
+  'regular-espresso-blends-coffee-beans': [['/', 'Home'], ['/premium-espresso-blends-coffee-beans/', 'Whole Bean Coffee'], ['/regular-espresso-blends-coffee-beans/', 'Regular Espresso Blends']],
+  'premium-espresso-coffee-beans': [['/', 'Home'], ['/premium-espresso-blends-coffee-beans/', 'Whole Bean Coffee'], ['/premium-espresso-coffee-beans/', 'Premium Espresso Blends']],
+  'single-origin-espresso-soe-coffee-beans': [['/', 'Home'], ['/premium-espresso-blends-coffee-beans/', 'Whole Bean Coffee'], ['/single-origin-espresso-soe-coffee-beans/', 'Single Origin Espresso (SOE)']],
+  'coffee-makers': [['/', 'Home'], ['/coffee-makers/', 'Coffee Makers']],
+  'coffee-pods-bags': [['/', 'Home'], ['/coffee-pods-bags/', 'Coffee Pods & Bags']],
+  'coffee-accessories': [['/', 'Home'], ['/coffee-accessories/', 'Coffee Accessories']],
+  'about-us-coffee-beans': [['/', 'Home'], ['/about-us-coffee-beans/', 'About Us']],
+  'blog': [['/', 'Home'], ['/blog/', 'Blog']],
+  'catalog-download': [['/', 'Home'], ['/catalog-download/', 'E-Catalog Download']],
+  'request-a-consultation-coffee-wholesale-inquiry': [['/', 'Home'], ['/request-a-consultation-coffee-wholesale-inquiry/', 'Request a Quote']],
+  'privacy-policy': [['/', 'Home'], ['/privacy-policy/', 'Privacy Policy']],
+  'terms-and-conditions': [['/', 'Home'], ['/terms-and-conditions/', 'Terms & Conditions']]
+};
+
+function breadcrumbJsonLdFromTrail(trail) {
   const items = trail.map((c, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: c[1],
     item: domain + c[0]
   }));
-  items.push({ '@type': 'ListItem', position: items.length + 1, name: pname, item: domain + '/' + slug + '/' });
   return '<script type="application/ld+json">\n' + JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: items
   }, null, 2) + '\n</script>';
+}
+function breadcrumbJsonLd(slug, pname, category) {
+  const trail = (crumbTrail[category] || [['/', 'Home']]).concat([['/' + slug + '/', pname]]);
+  return breadcrumbJsonLdFromTrail(trail);
 }
 const productCard = (p) => {
   const imgs = (galleryMap && galleryMap[p.slug]) || [];
@@ -189,10 +217,19 @@ function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
     html = html.replace(/\{\{GALLERY\}\}/g, galleryHtml(slug, fm.pname || fm.title || 'Yinor Coffee'));
   }
 
-  // Inject BreadcrumbList schema on product pages
+  // Inject BreadcrumbList schema: products, blog posts and section pages.
   const prod = products.find(p => p.slug === slug);
   if (prod) {
     html = html.replace('</body>', '\n' + breadcrumbJsonLd(slug, prod.pname || fm.title || prod.slug, prod.category) + '\n</body>');
+  } else {
+    let trail = pageTrail[slug] || null;
+    if (!trail && posts.some(p => p.slug === slug)) {
+      // Blog post: Home > Blog > <post title>. fm.title carries the
+      // " | Yinor Coffee" suffix for the <title> tag - strip it for the crumb.
+      const clean = (fm.title || slug).replace(/\s*\|\s*Yinor Coffee[^|]*$/, '').trim();
+      trail = [['/', 'Home'], ['/blog/', 'Blog'], ['/' + slug + '/', clean]];
+    }
+    if (trail) html = html.replace('</body>', '\n' + breadcrumbJsonLdFromTrail(trail) + '\n</body>');
   }
 
   if (basePath) html = html.replace(/(href|src)="\//g, `$1="${basePath}/`);
