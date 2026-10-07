@@ -187,6 +187,44 @@ function galleryHtml(slug, pname) {
   return '<div class="gallery" data-gallery>\n    <div class="gallery-slides">\n' + slides + '\n    </div>\n    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image" onclick="galleryStep(this,-1)">&#10094;</button>\n    <button class="gallery-btn gallery-next" type="button" aria-label="Next image" onclick="galleryStep(this,1)">&#10095;</button>\n    <div class="gallery-thumbs">\n' + thumbs + '\n    </div>\n  </div>';
 }
 
+// ---------- image post-processing ----------
+// assets/img/image-meta.json is produced by tools/optimize-images.js (needs sharp).
+// Keeping it as a committed JSON means THIS build stays dependency-free: no sharp
+// required to rebuild the site, only to re-run the optimisation.
+//
+// For every <img> the build now:
+//   1. adds width/height from the real pixel size  -> reserves the aspect ratio,
+//      which removes the layout shift (CLS) caused by "max-width:100%;height:auto";
+//   2. adds decoding="async"                       -> off-main-thread decode;
+//   3. wraps it in <picture> with a WebP source when a .webp sibling exists.
+// The CSS rule `picture{display:contents}` keeps the wrapper out of the layout
+// tree, so flex/absolute positioning of the images behaves exactly as before and
+// browsers without WebP support fall back to the original <img>.
+const imageMetaFile = path.join(root, 'assets', 'img', 'image-meta.json');
+let imageMeta = {};
+if (fs.existsSync(imageMetaFile)) {
+  try { imageMeta = JSON.parse(read(imageMetaFile)); } catch (e) { imageMeta = {}; }
+}
+function enhanceImages(html) {
+  return html.replace(/<img\b[^>]*>/g, (tag) => {
+    const srcM = tag.match(/\bsrc="([^"]+)"/);
+    if (!srcM) return tag;
+    const src = srcM[1].split('?')[0];
+    const meta = imageMeta[src];
+    if (!meta) return tag;                 // external / unknown asset: leave alone
+    let out = tag;
+    const dims = (!/\bwidth=/.test(out) && !/\bheight=/.test(out))
+      ? ` width="${meta.w}" height="${meta.h}"` : '';
+    const dec = /\bdecoding=/.test(out) ? '' : ' decoding="async"';
+    out = out.replace('<img', '<img' + dims + dec);
+    if (meta.webp) {
+      const webp = src.replace(/\.(jpe?g|png)$/i, '.webp');
+      out = `<picture><source srcset="${webp}" type="image/webp">${out}</picture>`;
+    }
+    return out;
+  });
+}
+
 function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
   const content = read(bodyFile);
   const fm = parseFrontMatter(content);
@@ -234,6 +272,8 @@ function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
     }
     if (trail) html = html.replace('</body>', '\n' + breadcrumbJsonLdFromTrail(trail) + '\n</body>');
   }
+
+  html = enhanceImages(html);
 
   if (basePath) html = html.replace(/(href|src)="\//g, `$1="${basePath}/`);
 
@@ -290,7 +330,7 @@ for (const p of posts) buildPage(path.join(src, 'posts', p.slug + '.body.html'),
     ['{{ROBOTS}}', fm.robots || 'noindex, follow']
   ].reduce((acc, pair) => sub(acc, pair[0], pair[1]), headerTpl)
     + '\n' + stripFrontMatter(c) + '\n' + footerTpl;
-  write(path.join(out, '404.html'), html);
+  write(path.join(out, '404.html'), enhanceImages(html));
 }
 
 // ---------- robots.txt ----------
@@ -335,9 +375,21 @@ write(path.join(out, '.nojekyll'), '');
 write(path.join(out, 'CNAME'), 'yinorcoffee.com\n');
 
 // ---------- Decap CMS admin ----------
-if (fs.existsSync(path.join(src, 'admin'))) {
-  fs.cpSync(path.join(src, 'admin'), path.join(out, 'admin'), { recursive: true });
-  console.log('built: docs/admin (Decap CMS)');
+// REMOVED 2026-10-04: the CMS is dead. Its backend was `git-gateway`, which needs
+// Netlify Identity - and this site moved to GitHub Pages, so the login can never
+// succeed. The page still answered HTTP 200 with no noindex, i.e. it was a
+// crawlable dead end. The source stays in src/admin for reference; it is no
+// longer published, so /admin/ now returns a clean 404 and Google will drop it.
+
+// ---------- favicon.ico ----------
+// Browsers request /favicon.ico automatically even when a PNG icon is declared.
+// Without this file that request 404s on every first visit.
+{
+  const ico = path.join(root, 'assets', 'favicon.ico');
+  if (fs.existsSync(ico)) {
+    fs.copyFileSync(ico, path.join(out, 'favicon.ico'));
+    console.log('built: docs/favicon.ico');
+  }
 }
 
 // ---------- guard: fail loudly on unrendered template tokens ----------

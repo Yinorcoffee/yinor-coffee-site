@@ -27,6 +27,10 @@ body {
   font-size: 17px;
 }
 img { max-width: 100%; height: auto; display: block; }
+/* The build wraps WebP-capable images in <picture>. display:contents removes the
+   wrapper from the layout tree, so the <img> stays the effective flex/grid child
+   and absolute positioning (hero background, product-card images) is unchanged. */
+picture { display: contents; }
 a { color: var(--coffee); text-decoration: none; }
 a:hover { color: var(--amber-dark); }
 h1, h2, h3, h4, h5 { font-family: var(--font-head); color: var(--dark); line-height: 1.25; }

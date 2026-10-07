@@ -43,10 +43,20 @@
   <meta name="twitter:description" content="Wholesale coffee supplier in China - roasted beans, espresso machines, capsules, drip bags and drinkware. Private label & OEM, worldwide shipping.">
   <meta name="twitter:image" content="https://yinorcoffee.com/assets/img/hero-home.jpg">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css?v=5">
+  <!--
+    Fonts load ASYNCHRONOUSLY. A plain <link rel="stylesheet"> blocks first paint
+    until Google answers, which costs ~200-400 ms of render delay on every page.
+    media="print" makes the browser fetch it without blocking; onload then swaps
+    it to `all`. The <noscript> copy keeps JS-disabled visitors styled.
+  -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=6">
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "39282152e3a74ae6a139b420a9de73e0"}'></script>
   <!-- Google Translate: site-wide language switcher (ES / AR / DE / FR / PT / IT / RU / TR) -->
   <script>
@@ -121,7 +131,6 @@
     "logo": "https://yinorcoffee.com/assets/img/logo.png",
     "sameAs": [
       "https://www.facebook.com/profile.php?id=61565941160758",
-      "https://www.linkedin.com/in/%E6%B3%89%E5%85%B4-%E6%9D%8E-84903a131/",
       "https://www.instagram.com/yinor02/"
     ],
     "contactPoint": {
@@ -155,7 +164,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/">
-        <img src="/assets/img/logo.png" alt="Yinor Coffee logo">
+        <picture><source srcset="/assets/img/logo.webp" type="image/webp"><img width="180" height="180" decoding="async" src="/assets/img/logo.png" alt="Yinor Coffee logo"></picture>
         <span>Yinor Coffee<small>Wholesale Specialty Coffee</small></span>
       </a>
       <button class="nav-toggle" aria-label="Open menu" onclick="document.getElementById('siteNav').classList.toggle('open')">&#9776;</button>
@@ -198,7 +207,7 @@
   <main>
 
 <section class="hero">
-  <img class="bg" src="/assets/img/hero-home.jpg" alt="Freshly roasted specialty coffee beans">
+  <picture><source srcset="/assets/img/hero-home.webp" type="image/webp"><img width="1600" height="1600" decoding="async" class="bg" src="/assets/img/hero-home.jpg" alt="Freshly roasted specialty coffee beans"></picture>
   <div class="overlay"></div>
   <div class="container">
     <h1>Wholesale Coffee Machines, Beans &amp; Capsules | Your One-Stop Coffee Supplier in China</h1>
@@ -226,7 +235,7 @@
     </div>
     <div class="grid grid-4">
       <a class="cat-card" href="/premium-espresso-blends-coffee-beans">
-        <img src="/assets/img/gallery/product-line-1.jpg" alt="Wholesale whole bean coffee - espresso blends and single origins" loading="lazy">
+        <picture><source srcset="/assets/img/gallery/product-line-1.webp" type="image/webp"><img width="800" height="574" decoding="async" src="/assets/img/gallery/product-line-1.jpg" alt="Wholesale whole bean coffee - espresso blends and single origins" loading="lazy"></picture>
         <div class="body">
           <h3>Whole Bean Coffee</h3>
           <p>Regular blends, premium blends and single origin (SOE) beans, roasted fresh in 454g wholesale packs.</p>
@@ -234,7 +243,7 @@
         </div>
       </a>
       <a class="cat-card" href="/coffee-makers">
-        <img src="/assets/img/gallery/product-line-2.jpg" alt="Wholesale coffee makers - espresso machines and pour-over kettles" loading="lazy">
+        <picture><source srcset="/assets/img/gallery/product-line-2.webp" type="image/webp"><img width="800" height="621" decoding="async" src="/assets/img/gallery/product-line-2.jpg" alt="Wholesale coffee makers - espresso machines and pour-over kettles" loading="lazy"></picture>
         <div class="body">
           <h3>Coffee Makers</h3>
           <p>Espresso machines, Turkish coffee pots and gooseneck kettles for home, office and hotel programs.</p>
@@ -242,7 +251,7 @@
         </div>
       </a>
       <a class="cat-card" href="/coffee-pods-bags">
-        <img src="/assets/img/gallery/product-line-3.jpg" alt="Wholesale coffee capsules - Nespresso compatible aluminum pods" loading="lazy">
+        <picture><source srcset="/assets/img/gallery/product-line-3.webp" type="image/webp"><img width="800" height="562" decoding="async" src="/assets/img/gallery/product-line-3.jpg" alt="Wholesale coffee capsules - Nespresso compatible aluminum pods" loading="lazy"></picture>
         <div class="body">
           <h3>Coffee Capsules</h3>
           <p>Aluminum capsules compatible with Nespresso machines, nitrogen-sealed for long-lasting freshness.</p>
@@ -250,7 +259,7 @@
         </div>
       </a>
       <a class="cat-card" href="/coffee-pods-bags">
-        <img src="/assets/img/gallery/product-line-4.jpg" alt="Wholesale drip bag coffee - single-serve pour-over filter bags" loading="lazy">
+        <picture><source srcset="/assets/img/gallery/product-line-4.webp" type="image/webp"><img width="800" height="614" decoding="async" src="/assets/img/gallery/product-line-4.jpg" alt="Wholesale drip bag coffee - single-serve pour-over filter bags" loading="lazy"></picture>
         <div class="body">
           <h3>Drip Bag Coffee</h3>
           <p>Single-serve pour-over drip bags in 6 flavors - no machine needed, perfect for hotels and retail.</p>
@@ -302,9 +311,9 @@
     <div class="product-grid">
 <a class="product-card" href="/fruit-sugar-signature-espresso-medium-roast-sidama-and-yirgacheffe-blend-naturally-sweet-coffee-bean">
   <div class="pc-images">
-    <img src="/assets/img/fruit-sugar.jpg" alt="Fruit Sugar - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/fruit-sugar.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/fruit-sugar.jpg" alt="Fruit Sugar - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/16f20904-5f16-43b0-9a55-ce834d4dfa4f.jpg" alt="Fruit Sugar - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/16f20904-5f16-43b0-9a55-ce834d4dfa4f.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/16f20904-5f16-43b0-9a55-ce834d4dfa4f.jpg" alt="Fruit Sugar - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Fruit Sugar</h3>
@@ -314,9 +323,9 @@
 </a>
 <a class="product-card" href="/high-quality-espresso-blends-coffee-beans-dark-roastedmalt-creamy-chocolate-toast-hazelnut-flavor">
   <div class="pc-images">
-    <img src="/assets/img/macco.jpg" alt="Macco - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/macco.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/macco.jpg" alt="Macco - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg" alt="Macco - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.webp" type="image/webp"><img width="800" height="684" decoding="async" src="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg" alt="Macco - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Macco</h3>
@@ -326,9 +335,9 @@
 </a>
 <a class="product-card" href="/kenya-nyeri-aa-soe-espresso-coffeeberry-brown-sugar-medium-aciditymedium-roast-coffee-bean">
   <div class="pc-images">
-    <img src="/assets/img/kenya-nyeri.jpg" alt="Kenya Nyeri AA - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/kenya-nyeri.webp" type="image/webp"><img width="1280" height="1280" decoding="async" src="/assets/img/kenya-nyeri.jpg" alt="Kenya Nyeri AA - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/386a8e14-38ac-48c0-9e02-99622be80684.jpg" alt="Kenya Nyeri AA - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/386a8e14-38ac-48c0-9e02-99622be80684.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/386a8e14-38ac-48c0-9e02-99622be80684.jpg" alt="Kenya Nyeri AA - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Kenya Nyeri AA</h3>
@@ -338,9 +347,9 @@
 </a>
 <a class="product-card" href="/yirgacheffe-natural-soe-espresso-coffee-ethiopia-g1-2400m-heirloom-lemon-and-tropical-fruit-flavor-coffee-bean">
   <div class="pc-images">
-    <img src="/assets/img/yirgacheffe-soe.jpg" alt="Yirgacheffe Natural SOE - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/yirgacheffe-soe.webp" type="image/webp"><img width="2048" height="2048" decoding="async" src="/assets/img/yirgacheffe-soe.jpg" alt="Yirgacheffe Natural SOE - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/fa369bc8-fbf3-4c3d-b130-1482cda5bf9e.jpg" alt="Yirgacheffe Natural SOE - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/fa369bc8-fbf3-4c3d-b130-1482cda5bf9e.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/fa369bc8-fbf3-4c3d-b130-1482cda5bf9e.jpg" alt="Yirgacheffe Natural SOE - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Yirgacheffe Natural SOE</h3>
@@ -350,9 +359,9 @@
 </a>
 <a class="product-card" href="/sunshine-orchard-whole-bean-coffee-454g-medium-dark-roast-espresso-blend">
   <div class="pc-images">
-    <img src="/assets/img/sunshine-orchard.jpg" alt="Sunshine Orchard - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/sunshine-orchard.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/sunshine-orchard.jpg" alt="Sunshine Orchard - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/635f6629-6396-4b2b-b2cf-deccae4f4260.jpg" alt="Sunshine Orchard - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/635f6629-6396-4b2b-b2cf-deccae4f4260.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/635f6629-6396-4b2b-b2cf-deccae4f4260.jpg" alt="Sunshine Orchard - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Sunshine Orchard</h3>
@@ -362,9 +371,9 @@
 </a>
 <a class="product-card" href="/wholesale-high-quality-yunnan-ethiopia-coffee-beans-grizzly-basque-10-series-espresso-coffee-beans-454gbag-oem-customizable">
   <div class="pc-images">
-    <img src="/assets/img/caramel-biscuit.jpg" alt="Caramel Biscuit - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/caramel-biscuit.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/caramel-biscuit.jpg" alt="Caramel Biscuit - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/172fe072-81cc-4eff-921e-07f71532dab7.jpg" alt="Caramel Biscuit - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/172fe072-81cc-4eff-921e-07f71532dab7.webp" type="image/webp"><img width="634" height="634" decoding="async" src="/assets/img/gallery/172fe072-81cc-4eff-921e-07f71532dab7.jpg" alt="Caramel Biscuit - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Caramel Biscuit</h3>
@@ -486,7 +495,7 @@
       <div class="footer-grid">
         <div>
           <a class="brand" href="/" style="color:#fff;margin-bottom:14px;display:inline-flex;">
-            <img src="/assets/img/logo.png" alt="Yinor Coffee logo" style="width:40px;height:40px;border-radius:8px;">
+            <picture><source srcset="/assets/img/logo.webp" type="image/webp"><img width="180" height="180" decoding="async" src="/assets/img/logo.png" alt="Yinor Coffee logo" style="width:40px;height:40px;border-radius:8px;"></picture>
             <span style="font-family:var(--font-head);font-weight:700;">Yinor Coffee</span>
           </a>
           <p style="margin-top:12px;">A coffee export &amp; sourcing partner based in Zhanjiang, China. Roasted coffee beans, drip bag coffee, capsules and coffee machines from vetted partner factories, with private label, OEM/ODM, combined mixed orders and one-stop export handling for importers, supermarkets and coffee brands worldwide.</p>

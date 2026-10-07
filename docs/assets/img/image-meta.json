@@ -1,0 +1,979 @@
+{
+ "/assets/img/caramel-biscuit.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 38072
+ },
+ "/assets/img/chocolate-nuts.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 31842
+ },
+ "/assets/img/colorful-summer.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 64420
+ },
+ "/assets/img/fruit-sugar.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 72104
+ },
+ "/assets/img/gallery/05fd61d2-8ea9-4d1b-981a-c01936a1876b.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 125398
+ },
+ "/assets/img/gallery/0fd63a3e-afb1-4dea-9ebb-e92c265146a8.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 40856
+ },
+ "/assets/img/gallery/100508a5-5e37-4f4e-81fb-68134b0c7e03.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 54526
+ },
+ "/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg": {
+  "w": 800,
+  "h": 684,
+  "webp": true,
+  "webpBytes": 48190
+ },
+ "/assets/img/gallery/16f20904-5f16-43b0-9a55-ce834d4dfa4f.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 70858
+ },
+ "/assets/img/gallery/172fe072-81cc-4eff-921e-07f71532dab7.jpg": {
+  "w": 634,
+  "h": 634,
+  "webp": true,
+  "webpBytes": 53388
+ },
+ "/assets/img/gallery/1a3a5fed-1123-4d55-853d-18d951209a9d.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 55702
+ },
+ "/assets/img/gallery/1b2befcf-6d49-4f07-a336-bc8ee8223710.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 63090
+ },
+ "/assets/img/gallery/1c8ee8e1-9d00-4397-8425-47ccfd58cb3a.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 33972
+ },
+ "/assets/img/gallery/1e2bdaeb-8be4-4174-8923-01543d07b2c0.jpg": {
+  "w": 636,
+  "h": 636,
+  "webp": true,
+  "webpBytes": 40056
+ },
+ "/assets/img/gallery/1ea04742-cc3a-4423-b81c-30f3838dc1af.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 39982
+ },
+ "/assets/img/gallery/1f9ebec5-1d0b-43eb-9107-c2c411614414.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 38530
+ },
+ "/assets/img/gallery/22e255dc-5a2c-4b6b-a31d-35f2511fe03d.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 109128
+ },
+ "/assets/img/gallery/24392151-ecea-4a22-84c8-d665c28f7c3f.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 24470
+ },
+ "/assets/img/gallery/2507c068-10ce-48ea-83a6-0271cc46bd09.jpg": {
+  "w": 512,
+  "h": 512,
+  "webp": true,
+  "webpBytes": 16384
+ },
+ "/assets/img/gallery/33ea7e4f-8a00-480d-9635-549fe0d0be43.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 38040
+ },
+ "/assets/img/gallery/34b6f61c-4a62-4ad9-b1ce-ea5ac6ad1612.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 71872
+ },
+ "/assets/img/gallery/386a8e14-38ac-48c0-9e02-99622be80684.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 66056
+ },
+ "/assets/img/gallery/38f81a75-c103-45d4-bc3e-5089a8f21a09.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 32874
+ },
+ "/assets/img/gallery/3a7bd01e-f241-4742-ac1a-432750cc5c34.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 30578
+ },
+ "/assets/img/gallery/3be51e8f-8e09-4af6-99c1-a7cc6670c604.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 54578
+ },
+ "/assets/img/gallery/3cde4b9b-9460-4499-9c94-1366c79ce03a.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 43532
+ },
+ "/assets/img/gallery/3e1df788-0859-45c9-bc81-fda0fa7fb807.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 63492
+ },
+ "/assets/img/gallery/40d462cc-ee59-4779-b934-d510af88f4b8.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 55322
+ },
+ "/assets/img/gallery/4ae51f9d-7c16-41b8-91a1-3b4d7be29a56.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 32138
+ },
+ "/assets/img/gallery/4cf2d705-168d-450b-9445-9ecf3a5817da.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 62686
+ },
+ "/assets/img/gallery/53cc42e0-6fea-4ae8-acd9-211fac7002a7.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 60816
+ },
+ "/assets/img/gallery/5b1d6d7e-1f4e-429f-acb7-a68f0f31ee51.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 46404
+ },
+ "/assets/img/gallery/5c42c2c0-5333-43f5-af14-6bfafdbb3a8d.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 36496
+ },
+ "/assets/img/gallery/5c6ea7b0-97b5-4604-9c2c-0afdd6cd0e75.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 65332
+ },
+ "/assets/img/gallery/635f6629-6396-4b2b-b2cf-deccae4f4260.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 47710
+ },
+ "/assets/img/gallery/6531727c-e4b7-413c-86d6-8bd5a7b13bc4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 59698
+ },
+ "/assets/img/gallery/6bf6e66a-a59e-4c78-aaa4-b83f16905dfe.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 34276
+ },
+ "/assets/img/gallery/76275910-432f-4c85-8d5f-5a6f5592a400.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 84300
+ },
+ "/assets/img/gallery/76623f9e-5f5b-4ec8-a9c1-abe76cc0209f.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 56418
+ },
+ "/assets/img/gallery/8194d0a8-c6ad-4c81-a1c2-47d82aa55b65.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 51444
+ },
+ "/assets/img/gallery/84fc0d2a-1cb4-4521-9242-b1eb71e503ff.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 59314
+ },
+ "/assets/img/gallery/85beee0d-a155-4ccc-b586-ea39f15c1ed4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50372
+ },
+ "/assets/img/gallery/a1415b35-70b9-4dba-9d59-6cc39ae6a1cd.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 62058
+ },
+ "/assets/img/gallery/a4824fb0-94b0-4a77-9a68-c86b411066e5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 26172
+ },
+ "/assets/img/gallery/a6fb83a2-a6ea-4585-a5cb-ec72af32c676.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 25540
+ },
+ "/assets/img/gallery/bdd2e3ea-f2a4-4984-b18e-b28b2a7b4b6d.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50128
+ },
+ "/assets/img/gallery/be5afa76-0740-44dd-bcbf-616547ec5bf6.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 30770
+ },
+ "/assets/img/gallery/bfabad72-356c-4074-96d5-223fd3be6a01.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 96742
+ },
+ "/assets/img/gallery/c58bc129-43f7-4386-bfc3-66c223dd17b4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 72590
+ },
+ "/assets/img/gallery/capsule-coffee-maker-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 28044
+ },
+ "/assets/img/gallery/capsule-coffee-maker-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 36390
+ },
+ "/assets/img/gallery/capsule-coffee-maker-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 43092
+ },
+ "/assets/img/gallery/capsule-coffee-maker-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 45240
+ },
+ "/assets/img/gallery/capsule-coffee-maker-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50494
+ },
+ "/assets/img/gallery/cc9888bc-635e-4eb2-a61e-cb6adf9227ef.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50914
+ },
+ "/assets/img/gallery/cda8ebbf-edee-4248-9818-5784ab8d8268.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 37832
+ },
+ "/assets/img/gallery/ce6d312b-8661-4211-8313-d981a5be680c.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 61782
+ },
+ "/assets/img/gallery/ceramic-espresso-cup-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 48382
+ },
+ "/assets/img/gallery/ceramic-espresso-cup-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 34692
+ },
+ "/assets/img/gallery/ceramic-espresso-cup-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 33256
+ },
+ "/assets/img/gallery/ceramic-espresso-cup-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 26550
+ },
+ "/assets/img/gallery/ceramic-espresso-cup-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 27138
+ },
+ "/assets/img/gallery/ceramic-espresso-cup-6.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 49758
+ },
+ "/assets/img/gallery/ceramic-espresso-cup-7.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 55898
+ },
+ "/assets/img/gallery/coffee-capsule-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 37112
+ },
+ "/assets/img/gallery/coffee-capsule-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 47896
+ },
+ "/assets/img/gallery/coffee-capsule-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 31808
+ },
+ "/assets/img/gallery/coffee-capsule-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 34510
+ },
+ "/assets/img/gallery/coffee-capsule-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 36256
+ },
+ "/assets/img/gallery/coffee-maker-525n-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 48698
+ },
+ "/assets/img/gallery/coffee-maker-525n-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 64810
+ },
+ "/assets/img/gallery/coffee-maker-525n-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 58486
+ },
+ "/assets/img/gallery/coffee-maker-525n-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 32420
+ },
+ "/assets/img/gallery/coffee-maker-525n-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 53402
+ },
+ "/assets/img/gallery/coffee-maker-526n-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 60472
+ },
+ "/assets/img/gallery/coffee-maker-526n-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 72018
+ },
+ "/assets/img/gallery/coffee-maker-526n-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 60042
+ },
+ "/assets/img/gallery/coffee-maker-526n-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 27382
+ },
+ "/assets/img/gallery/coffee-maker-526n-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 52282
+ },
+ "/assets/img/gallery/coffee-maker-527n-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 46368
+ },
+ "/assets/img/gallery/coffee-maker-527n-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 31626
+ },
+ "/assets/img/gallery/coffee-maker-527n-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 57720
+ },
+ "/assets/img/gallery/coffee-maker-527n-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 39498
+ },
+ "/assets/img/gallery/coffee-maker-527n-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 58654
+ },
+ "/assets/img/gallery/d7efb50a-6f60-44e0-a705-6ef9ef4cce7f.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 41488
+ },
+ "/assets/img/gallery/d994d263-652b-4900-8f95-07817f33668a.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 57078
+ },
+ "/assets/img/gallery/daece3c0-2b47-47cf-bcf5-41dfd5702f7b.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 53564
+ },
+ "/assets/img/gallery/double-wall-glass-cup-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50342
+ },
+ "/assets/img/gallery/double-wall-glass-cup-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50676
+ },
+ "/assets/img/gallery/double-wall-glass-cup-3.jpg": {
+  "w": 800,
+  "h": 765,
+  "webp": true,
+  "webpBytes": 32068
+ },
+ "/assets/img/gallery/double-wall-glass-cup-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 58320
+ },
+ "/assets/img/gallery/double-wall-glass-cup-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 46084
+ },
+ "/assets/img/gallery/double-wall-glass-cup-6.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 60368
+ },
+ "/assets/img/gallery/drip-bag-coffee-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50094
+ },
+ "/assets/img/gallery/drip-bag-coffee-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 31766
+ },
+ "/assets/img/gallery/drip-bag-coffee-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 51026
+ },
+ "/assets/img/gallery/drip-bag-coffee-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 39916
+ },
+ "/assets/img/gallery/drip-bag-coffee-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 17402
+ },
+ "/assets/img/gallery/e27ca8ed-1852-4df0-a787-3697e6d88637.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 40884
+ },
+ "/assets/img/gallery/e678c48d-4c85-425f-9a17-2c7702a44091.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 82508
+ },
+ "/assets/img/gallery/ea74d744-6314-4362-93c4-22134d220d6b.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 51202
+ },
+ "/assets/img/gallery/ef034012-106d-4e85-a599-f4fb86767ed1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 64576
+ },
+ "/assets/img/gallery/efb2a3e6-331b-490d-ace7-ff3034b52b4e.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 40290
+ },
+ "/assets/img/gallery/efe8a85e-251a-4e2a-b8d5-14f42ac11919.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 58980
+ },
+ "/assets/img/gallery/fa369bc8-fbf3-4c3d-b130-1482cda5bf9e.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 52028
+ },
+ "/assets/img/gallery/fa7eb776-6215-42f1-8a23-8b277951c724.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 53210
+ },
+ "/assets/img/gallery/fee19a6f-33c9-4f98-8fda-2a41ea4d42ca.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 91112
+ },
+ "/assets/img/gallery/gooseneck-kettle-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 58476
+ },
+ "/assets/img/gallery/gooseneck-kettle-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 44612
+ },
+ "/assets/img/gallery/gooseneck-kettle-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 46696
+ },
+ "/assets/img/gallery/gooseneck-kettle-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 31206
+ },
+ "/assets/img/gallery/gooseneck-kettle-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 31028
+ },
+ "/assets/img/gallery/holiday-drip-gift-set-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 33998
+ },
+ "/assets/img/gallery/holiday-drip-gift-set-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 54346
+ },
+ "/assets/img/gallery/holiday-drip-gift-set-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 55730
+ },
+ "/assets/img/gallery/holiday-drip-gift-set-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 24476
+ },
+ "/assets/img/gallery/holiday-drip-gift-set-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50494
+ },
+ "/assets/img/gallery/moka-pot-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 26436
+ },
+ "/assets/img/gallery/moka-pot-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 33872
+ },
+ "/assets/img/gallery/moka-pot-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 36756
+ },
+ "/assets/img/gallery/moka-pot-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 32848
+ },
+ "/assets/img/gallery/moka-pot-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 24026
+ },
+ "/assets/img/gallery/moka-pot-6.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 17304
+ },
+ "/assets/img/gallery/moka-pot-7.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 19530
+ },
+ "/assets/img/gallery/moka-pot-8.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 18242
+ },
+ "/assets/img/gallery/product-line-1.jpg": {
+  "w": 800,
+  "h": 574,
+  "webp": true,
+  "webpBytes": 62672
+ },
+ "/assets/img/gallery/product-line-2.jpg": {
+  "w": 800,
+  "h": 621,
+  "webp": true,
+  "webpBytes": 35540
+ },
+ "/assets/img/gallery/product-line-3.jpg": {
+  "w": 800,
+  "h": 562,
+  "webp": true,
+  "webpBytes": 28226
+ },
+ "/assets/img/gallery/product-line-4.jpg": {
+  "w": 800,
+  "h": 614,
+  "webp": true,
+  "webpBytes": 27338
+ },
+ "/assets/img/gallery/santa-wreath-drip-gift-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 53812
+ },
+ "/assets/img/gallery/santa-wreath-drip-gift-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 46504
+ },
+ "/assets/img/gallery/santa-wreath-drip-gift-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 67142
+ },
+ "/assets/img/gallery/santa-wreath-drip-gift-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 66538
+ },
+ "/assets/img/gallery/santa-wreath-drip-gift-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 78382
+ },
+ "/assets/img/gallery/santa-wreath-drip-gift-6.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 40318
+ },
+ "/assets/img/gallery/turkish-coffee-pot-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 23000
+ },
+ "/assets/img/gallery/turkish-coffee-pot-2-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 29516
+ },
+ "/assets/img/gallery/turkish-coffee-pot-2-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 50378
+ },
+ "/assets/img/gallery/turkish-coffee-pot-2-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 40472
+ },
+ "/assets/img/gallery/turkish-coffee-pot-2-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 38922
+ },
+ "/assets/img/gallery/turkish-coffee-pot-2-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 51424
+ },
+ "/assets/img/gallery/turkish-coffee-pot-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 22256
+ },
+ "/assets/img/gallery/turkish-coffee-pot-3-1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 17146
+ },
+ "/assets/img/gallery/turkish-coffee-pot-3-2.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 35814
+ },
+ "/assets/img/gallery/turkish-coffee-pot-3-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 29486
+ },
+ "/assets/img/gallery/turkish-coffee-pot-3-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 16066
+ },
+ "/assets/img/gallery/turkish-coffee-pot-3-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 35938
+ },
+ "/assets/img/gallery/turkish-coffee-pot-3.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 69036
+ },
+ "/assets/img/gallery/turkish-coffee-pot-4.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 41168
+ },
+ "/assets/img/gallery/turkish-coffee-pot-5.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 24846
+ },
+ "/assets/img/hero-about.jpg": {
+  "w": 1067,
+  "h": 1600,
+  "webp": true,
+  "webpBytes": 62500
+ },
+ "/assets/img/hero-home.jpg": {
+  "w": 1600,
+  "h": 1600,
+  "webp": true,
+  "webpBytes": 40490
+ },
+ "/assets/img/hero-products.jpg": {
+  "w": 1200,
+  "h": 1600,
+  "webp": false
+ },
+ "/assets/img/kenya-nyeri.jpg": {
+  "w": 1280,
+  "h": 1280,
+  "webp": true,
+  "webpBytes": 73548
+ },
+ "/assets/img/logo-yinor.png": {
+  "w": 391,
+  "h": 400,
+  "webp": true,
+  "webpBytes": 16046
+ },
+ "/assets/img/logo.png": {
+  "w": 180,
+  "h": 180,
+  "webp": true,
+  "webpBytes": 6858
+ },
+ "/assets/img/macco.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 32636
+ },
+ "/assets/img/rose-summer.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 34468
+ },
+ "/assets/img/sidama-bensa.jpg": {
+  "w": 2048,
+  "h": 2048,
+  "webp": true,
+  "webpBytes": 59114
+ },
+ "/assets/img/sidama-g1.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 32364
+ },
+ "/assets/img/sunshine-orchard.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 54328
+ },
+ "/assets/img/sweet-tangerine.jpg": {
+  "w": 800,
+  "h": 800,
+  "webp": true,
+  "webpBytes": 25448
+ },
+ "/assets/img/yirgacheffe-soe.jpg": {
+  "w": 2048,
+  "h": 2048,
+  "webp": true,
+  "webpBytes": 82892
+ }
+}

@@ -43,10 +43,20 @@
   <meta name="twitter:description" content="Wholesale Macco dark roast espresso - Yunnan, Brazil and Ethiopia with malt, creamy chocolate, toast and hazelnut notes. 454g packs, private label.">
   <meta name="twitter:image" content="https://yinorcoffee.com/assets/img/macco.jpg">
   <link rel="icon" href="/assets/img/logo.png" type="image/png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css?v=5">
+  <!--
+    Fonts load ASYNCHRONOUSLY. A plain <link rel="stylesheet"> blocks first paint
+    until Google answers, which costs ~200-400 ms of render delay on every page.
+    media="print" makes the browser fetch it without blocking; onload then swaps
+    it to `all`. The <noscript> copy keeps JS-disabled visitors styled.
+  -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Lora:wght@400;500;700&display=swap"></noscript>
+  <link rel="stylesheet" href="/assets/css/style.css?v=6">
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "39282152e3a74ae6a139b420a9de73e0"}'></script>
   <!-- Google Translate: site-wide language switcher (ES / AR / DE / FR / PT / IT / RU / TR) -->
   <script>
@@ -121,7 +131,6 @@
     "logo": "https://yinorcoffee.com/assets/img/logo.png",
     "sameAs": [
       "https://www.facebook.com/profile.php?id=61565941160758",
-      "https://www.linkedin.com/in/%E6%B3%89%E5%85%B4-%E6%9D%8E-84903a131/",
       "https://www.instagram.com/yinor02/"
     ],
     "contactPoint": {
@@ -155,7 +164,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="/">
-        <img src="/assets/img/logo.png" alt="Yinor Coffee logo">
+        <picture><source srcset="/assets/img/logo.webp" type="image/webp"><img width="180" height="180" decoding="async" src="/assets/img/logo.png" alt="Yinor Coffee logo"></picture>
         <span>Yinor Coffee<small>Wholesale Specialty Coffee</small></span>
       </a>
       <button class="nav-toggle" aria-label="Open menu" onclick="document.getElementById('siteNav').classList.toggle('open')">&#9776;</button>
@@ -208,18 +217,18 @@
   <div class="container grid grid-2" style="align-items:start;">
     <div class="gallery" data-gallery>
     <div class="gallery-slides">
-      <img src="/assets/img/gallery/38f81a75-c103-45d4-bc3e-5089a8f21a09.jpg" alt="Macco - wholesale coffee beans - Yinor Coffee" class="gallery-slide active" data-i="0" loading="lazy">
-      <img src="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg" alt="Macco - product image 2" class="gallery-slide" data-i="1" loading="lazy">
-      <img src="/assets/img/gallery/22e255dc-5a2c-4b6b-a31d-35f2511fe03d.jpg" alt="Macco - product image 3" class="gallery-slide" data-i="2" loading="lazy">
-      <img src="/assets/img/gallery/05fd61d2-8ea9-4d1b-981a-c01936a1876b.jpg" alt="Macco - product image 4" class="gallery-slide" data-i="3" loading="lazy">
+      <picture><source srcset="/assets/img/gallery/38f81a75-c103-45d4-bc3e-5089a8f21a09.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/38f81a75-c103-45d4-bc3e-5089a8f21a09.jpg" alt="Macco - wholesale coffee beans - Yinor Coffee" class="gallery-slide active" data-i="0" loading="lazy"></picture>
+      <picture><source srcset="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.webp" type="image/webp"><img width="800" height="684" decoding="async" src="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg" alt="Macco - product image 2" class="gallery-slide" data-i="1" loading="lazy"></picture>
+      <picture><source srcset="/assets/img/gallery/22e255dc-5a2c-4b6b-a31d-35f2511fe03d.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/22e255dc-5a2c-4b6b-a31d-35f2511fe03d.jpg" alt="Macco - product image 3" class="gallery-slide" data-i="2" loading="lazy"></picture>
+      <picture><source srcset="/assets/img/gallery/05fd61d2-8ea9-4d1b-981a-c01936a1876b.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/05fd61d2-8ea9-4d1b-981a-c01936a1876b.jpg" alt="Macco - product image 4" class="gallery-slide" data-i="3" loading="lazy"></picture>
     </div>
     <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image" onclick="galleryStep(this,-1)">&#10094;</button>
     <button class="gallery-btn gallery-next" type="button" aria-label="Next image" onclick="galleryStep(this,1)">&#10095;</button>
     <div class="gallery-thumbs">
-      <img src="/assets/img/gallery/38f81a75-c103-45d4-bc3e-5089a8f21a09.jpg" alt="Thumbnail 1" class="gallery-thumb active" data-i="0" loading="lazy">
-      <img src="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg" alt="Thumbnail 2" class="gallery-thumb" data-i="1" loading="lazy">
-      <img src="/assets/img/gallery/22e255dc-5a2c-4b6b-a31d-35f2511fe03d.jpg" alt="Thumbnail 3" class="gallery-thumb" data-i="2" loading="lazy">
-      <img src="/assets/img/gallery/05fd61d2-8ea9-4d1b-981a-c01936a1876b.jpg" alt="Thumbnail 4" class="gallery-thumb" data-i="3" loading="lazy">
+      <picture><source srcset="/assets/img/gallery/38f81a75-c103-45d4-bc3e-5089a8f21a09.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/38f81a75-c103-45d4-bc3e-5089a8f21a09.jpg" alt="Thumbnail 1" class="gallery-thumb active" data-i="0" loading="lazy"></picture>
+      <picture><source srcset="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.webp" type="image/webp"><img width="800" height="684" decoding="async" src="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg" alt="Thumbnail 2" class="gallery-thumb" data-i="1" loading="lazy"></picture>
+      <picture><source srcset="/assets/img/gallery/22e255dc-5a2c-4b6b-a31d-35f2511fe03d.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/22e255dc-5a2c-4b6b-a31d-35f2511fe03d.jpg" alt="Thumbnail 3" class="gallery-thumb" data-i="2" loading="lazy"></picture>
+      <picture><source srcset="/assets/img/gallery/05fd61d2-8ea9-4d1b-981a-c01936a1876b.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/05fd61d2-8ea9-4d1b-981a-c01936a1876b.jpg" alt="Thumbnail 4" class="gallery-thumb" data-i="3" loading="lazy"></picture>
     </div>
   </div>
     <div>
@@ -246,9 +255,9 @@
     <div class="product-grid">
 <a class="product-card" href="/colorful-summer-medium-roast-yirgacheffe-espresso-blend-454g-whole-bean-sweet-and-complex">
   <div class="pc-images">
-    <img src="/assets/img/colorful-summer.jpg" alt="Colorful Summer - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/colorful-summer.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/colorful-summer.jpg" alt="Colorful Summer - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/a1415b35-70b9-4dba-9d59-6cc39ae6a1cd.jpg" alt="Colorful Summer - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/a1415b35-70b9-4dba-9d59-6cc39ae6a1cd.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/a1415b35-70b9-4dba-9d59-6cc39ae6a1cd.jpg" alt="Colorful Summer - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Colorful Summer</h3>
@@ -258,9 +267,9 @@
 </a>
 <a class="product-card" href="/crema-soft-pack-454g-whole-bean-coffee-medium-roast-superiore-line-espresso-coffee-bag-sweet-taste-special-freshness-valve">
   <div class="pc-images">
-    <img src="/assets/img/sweet-tangerine.jpg" alt="Sweet Tangerine - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/sweet-tangerine.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/sweet-tangerine.jpg" alt="Sweet Tangerine - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/bfabad72-356c-4074-96d5-223fd3be6a01.jpg" alt="Sweet Tangerine - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/bfabad72-356c-4074-96d5-223fd3be6a01.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/bfabad72-356c-4074-96d5-223fd3be6a01.jpg" alt="Sweet Tangerine - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Sweet Tangerine</h3>
@@ -270,9 +279,9 @@
 </a>
 <a class="product-card" href="/fruit-sugar-signature-espresso-medium-roast-sidama-and-yirgacheffe-blend-naturally-sweet-coffee-bean">
   <div class="pc-images">
-    <img src="/assets/img/fruit-sugar.jpg" alt="Fruit Sugar - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/fruit-sugar.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/fruit-sugar.jpg" alt="Fruit Sugar - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/16f20904-5f16-43b0-9a55-ce834d4dfa4f.jpg" alt="Fruit Sugar - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/16f20904-5f16-43b0-9a55-ce834d4dfa4f.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/16f20904-5f16-43b0-9a55-ce834d4dfa4f.jpg" alt="Fruit Sugar - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Fruit Sugar</h3>
@@ -282,9 +291,9 @@
 </a>
 <a class="product-card" href="/high-quality-espresso-blends-coffee-beans-dark-roastedmalt-creamy-chocolate-toast-hazelnut-flavor">
   <div class="pc-images">
-    <img src="/assets/img/macco.jpg" alt="Macco - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/macco.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/macco.jpg" alt="Macco - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg" alt="Macco - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.webp" type="image/webp"><img width="800" height="684" decoding="async" src="/assets/img/gallery/1147e9c9-d9f0-42f3-bf22-fb8cc2e875c8.jpg" alt="Macco - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Macco</h3>
@@ -294,9 +303,9 @@
 </a>
 <a class="product-card" href="/strong-flavored-medium-roast-robusta-coffee-beans-wholesale-454g-box-espresso-blend">
   <div class="pc-images">
-    <img src="/assets/img/rose-summer.jpg" alt="Rose Summer Blend - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/rose-summer.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/rose-summer.jpg" alt="Rose Summer Blend - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/3be51e8f-8e09-4af6-99c1-a7cc6670c604.jpg" alt="Rose Summer Blend - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/3be51e8f-8e09-4af6-99c1-a7cc6670c604.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/gallery/3be51e8f-8e09-4af6-99c1-a7cc6670c604.jpg" alt="Rose Summer Blend - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Rose Summer Blend</h3>
@@ -306,9 +315,9 @@
 </a>
 <a class="product-card" href="/wholesale-high-quality-yunnan-ethiopia-coffee-beans-grizzly-basque-10-series-espresso-coffee-beans-454gbag-oem-customizable">
   <div class="pc-images">
-    <img src="/assets/img/caramel-biscuit.jpg" alt="Caramel Biscuit - wholesale coffee beans - Yinor Coffee" loading="lazy">
+    <picture><source srcset="/assets/img/caramel-biscuit.webp" type="image/webp"><img width="800" height="800" decoding="async" src="/assets/img/caramel-biscuit.jpg" alt="Caramel Biscuit - wholesale coffee beans - Yinor Coffee" loading="lazy"></picture>
 
-  <img src="/assets/img/gallery/172fe072-81cc-4eff-921e-07f71532dab7.jpg" alt="Caramel Biscuit - alternate image" class="pc-img2" loading="lazy">
+  <picture><source srcset="/assets/img/gallery/172fe072-81cc-4eff-921e-07f71532dab7.webp" type="image/webp"><img width="634" height="634" decoding="async" src="/assets/img/gallery/172fe072-81cc-4eff-921e-07f71532dab7.jpg" alt="Caramel Biscuit - alternate image" class="pc-img2" loading="lazy"></picture>
   </div>
   <div class="body">
     <h3>Caramel Biscuit</h3>
@@ -325,7 +334,7 @@
       <div class="footer-grid">
         <div>
           <a class="brand" href="/" style="color:#fff;margin-bottom:14px;display:inline-flex;">
-            <img src="/assets/img/logo.png" alt="Yinor Coffee logo" style="width:40px;height:40px;border-radius:8px;">
+            <picture><source srcset="/assets/img/logo.webp" type="image/webp"><img width="180" height="180" decoding="async" src="/assets/img/logo.png" alt="Yinor Coffee logo" style="width:40px;height:40px;border-radius:8px;"></picture>
             <span style="font-family:var(--font-head);font-weight:700;">Yinor Coffee</span>
           </a>
           <p style="margin-top:12px;">A coffee export &amp; sourcing partner based in Zhanjiang, China. Roasted coffee beans, drip bag coffee, capsules and coffee machines from vetted partner factories, with private label, OEM/ODM, combined mixed orders and one-stop export handling for importers, supermarkets and coffee brands worldwide.</p>
