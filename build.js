@@ -187,6 +187,20 @@ function galleryHtml(slug, pname) {
   return '<div class="gallery" data-gallery>\n    <div class="gallery-slides">\n' + slides + '\n    </div>\n    <button class="gallery-btn gallery-prev" type="button" aria-label="Previous image" onclick="galleryStep(this,-1)">&#10094;</button>\n    <button class="gallery-btn gallery-next" type="button" aria-label="Next image" onclick="galleryStep(this,1)">&#10095;</button>\n    <div class="gallery-thumbs">\n' + thumbs + '\n    </div>\n  </div>';
 }
 
+// ---------- strip authoring comments from production HTML ----------
+// The templates carry long internal notes (why the Netlify scripts were removed,
+// which social URLs are wrong, TODO lists). They are useful in src/ and useless in
+// the served page: on the homepage they were 9 comments / 4 KB, i.e. 10% of the
+// HTML. <script> bodies are left untouched so JSON-LD and inline JS stay intact.
+function stripHtmlComments(html) {
+  // Single left-to-right pass. Matching either a <script> block OR a comment at
+  // each position means a comment whose TEXT mentions "<script>" (the header
+  // notes do) is still consumed as a comment - splitting on script tags first
+  // got confused by exactly that and left the head comments in place.
+  return html.replace(/<script[\s\S]*?<\/script>|<!--(?!\[if)[\s\S]*?-->/gi,
+    (m) => (/^<script/i.test(m) ? m : ''));
+}
+
 // ---------- image post-processing ----------
 // assets/img/image-meta.json is produced by tools/optimize-images.js (needs sharp).
 // Keeping it as a committed JSON means THIS build stays dependency-free: no sharp
@@ -273,6 +287,7 @@ function buildPage(bodyFile, slug, isIndex, priority, excludeFromSitemap) {
     if (trail) html = html.replace('</body>', '\n' + breadcrumbJsonLdFromTrail(trail) + '\n</body>');
   }
 
+  html = stripHtmlComments(html);
   html = enhanceImages(html);
 
   if (basePath) html = html.replace(/(href|src)="\//g, `$1="${basePath}/`);
@@ -330,7 +345,7 @@ for (const p of posts) buildPage(path.join(src, 'posts', p.slug + '.body.html'),
     ['{{ROBOTS}}', fm.robots || 'noindex, follow']
   ].reduce((acc, pair) => sub(acc, pair[0], pair[1]), headerTpl)
     + '\n' + stripFrontMatter(c) + '\n' + footerTpl;
-  write(path.join(out, '404.html'), enhanceImages(html));
+  write(path.join(out, '404.html'), enhanceImages(stripHtmlComments(html)));
 }
 
 // ---------- robots.txt ----------
